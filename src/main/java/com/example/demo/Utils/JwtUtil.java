@@ -2,13 +2,19 @@ package com.example.demo.Utils;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.stereotype.Component;
 
+import javax.swing.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class JwtUtil {
 
     private static final String KEY = "itheima";
+
+    private Set<String> tokenBlacklist = new HashSet<>();
 
     //接收业务数据,生成token并返回
     public static String genToken(Map<String, Object> claims) {
@@ -27,4 +33,13 @@ public class JwtUtil {
                 .asMap();
     }
 
+    // 校验JWT是否有效
+    public boolean isTokenValid(String token) {
+        return !tokenBlacklist.contains(token);
+    }
+
+    //将token放入黑名单
+    public void invalidateToken(String token) {
+        tokenBlacklist.add(token);
+    }
 }

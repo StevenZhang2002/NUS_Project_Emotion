@@ -1,6 +1,8 @@
 package com.example.demo.Utils;
 
 
+import org.springframework.stereotype.Component;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import java.util.Map;
  * ThreadLocal 工具类
  */
 @SuppressWarnings("all")
+
 public class ThreadLocalUtil {
     //提供ThreadLocal对象,
     private static final ThreadLocal THREAD_LOCAL = new ThreadLocal();
