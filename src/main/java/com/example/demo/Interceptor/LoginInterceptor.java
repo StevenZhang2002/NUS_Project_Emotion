@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
-    @Value("${app.test-mode:false}") // 默认为 false
+    @Value("${app.test-mode:false}") //默认是false 没必要再为这个配置变量
     private boolean testMode;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
