@@ -19,6 +19,7 @@ CREATE TABLE tb_user (
                          updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+
 CREATE TABLE Record (
                         recordId INT AUTO_INCREMENT PRIMARY KEY,
                         userId INT,
