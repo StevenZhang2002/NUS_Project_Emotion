@@ -7,6 +7,7 @@ CREATE DATABASE IF NOT EXISTS nusteamproject1
 USE nusteamproject1;
 
 
+
 CREATE TABLE tb_user (
                          userId INT AUTO_INCREMENT PRIMARY KEY,
                          Username VARCHAR(50) NOT NULL,
