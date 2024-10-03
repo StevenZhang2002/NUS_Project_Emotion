@@ -50,6 +50,7 @@ jobs:
           source: "**"
           target: "/home/ubuntu/ec2"
 
+
       - name: Run Docker Compose on EC2
         uses: appleboy/ssh-action@master
         with:
