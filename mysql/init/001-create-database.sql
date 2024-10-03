@@ -1,5 +1,5 @@
 -- 创建名为 cicd_for_test 的数据库
-CREATE DATABASE IF NOT EXISTS cicd_for_test
+CREATE DATABASE IF NOT EXISTS nusteamproject1
   CHARACTER SET utf8mb4
   COLLATE utf8mb4_unicode_ci;
 
