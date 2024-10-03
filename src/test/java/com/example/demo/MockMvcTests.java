@@ -1,10 +1,12 @@
 package com.example.demo;
 
 
+import com.example.demo.Controller.FriendshipController;
 import com.example.demo.DTO.UserDTO;
 import com.example.demo.Entity.User;
 import com.example.demo.Service.FriendshipService;
 import com.example.demo.Service.UserService;
+import org.junit.Before;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,10 +16,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
@@ -35,6 +39,8 @@ public class MockMvcTests {
     @MockBean
     private UserService userService;
 
+
+
     @Test
     @DisplayName("测试 POST 创建好友关系接口")
     public void testFriendController_ValidUserId() throws Exception {
@@ -46,6 +52,7 @@ public class MockMvcTests {
         // 执行 POST 请求
         mockMvc.perform(MockMvcRequestBuilders.post("/friendship/BuildRelations")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .header("Authorization", "Bearer your-valid-jwt-token")
                         .param("userId1", "1")
                         .param("userId2", "2"))
                 .andExpect(status().isOk())
