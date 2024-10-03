@@ -17,14 +17,14 @@ public class PostLikeImpl implements LikeInterface {
 
 
 
-    @Transactional
     @Override
     public Likes addLike(int postId, int userId) {
         String userLikedKey = userIdPrefix + userId;
-//       如果redis中显示已经点过赞了，就无事发生
+//       如果redis中显示已经点过赞了，就会取消点赞
         if(redisTemplate.opsForSet().isMember(userLikedKey, postId)) {
-            return null;
+            return new Likes(postId, userId, true);
         }
+//      顺利点赞
         else{
 //            <userLikedKey:[postId1, postId2]>
             redisTemplate.opsForSet().add(userLikedKey, postId);
