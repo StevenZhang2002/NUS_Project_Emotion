@@ -7,7 +7,7 @@ app = Flask(__name__)
 # 配置Kafka消费者和生产者
 consumer = KafkaConsumer(
     'input_topic',  # Kafka 主题
-    bootstrap_servers=['localhost:9092'],  # Kafka服务器地址
+    bootstrap_servers=['localhost:9092'],  # Kafka服务器地址.
     auto_offset_reset='earliest',
     enable_auto_commit=True,
     group_id='flask-group',  # group_id
