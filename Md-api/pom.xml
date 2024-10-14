@@ -9,7 +9,24 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>Md-common</artifactId>
+    <artifactId>Md-api</artifactId>
+
+    <dependencies>
+        <!-- OpenFeign 启动器，用于声明式调用其他微服务的 HTTP 接口，简化 HTTP 客户端的调用逻辑 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+
+        <!-- Spring Cloud 负载均衡启动器，用于微服务之间的调用实现客户端的负载均衡，分配流量到多个服务实例 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+    </dependencies>
+
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -31,6 +48,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.3</version>
+        <version>2.7.12</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>iss.team</groupId>
@@ -27,6 +27,7 @@
         <module>Friendship-service</module>
         <module>Record-service</module>
         <module>Post-service</module>
+        <module>Md-api</module>
     </modules>
     <scm>
         <connection/>
@@ -35,93 +36,112 @@
         <url/>
     </scm>
     <properties>
-        <java.version>17</java.version>
+        <java.version>11</java.version>
     </properties>
     <dependencies>
+        <!-- MyBatis Plus 数据库 ORM 框架的启动依赖，用于简化数据库访问 -->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>3.0.3</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.5.2</version>
         </dependency>
 
-
-
+        <!-- MySQL 数据库驱动，负责连接 MySQL 数据库，配置为运行时依赖 -->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Apache Commons FileUpload 用于处理文件上传功能 -->
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
             <version>1.3.1</version>
         </dependency>
 
+        <!-- Apache Commons IO 用于文件和输入输出流处理的工具包 -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.4</version>
         </dependency>
 
-
+        <!-- Kafka 客户端库，用于与 Kafka 消息队列进行通信 -->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-clients</artifactId>
             <version>2.8.0</version>
         </dependency>
 
-
+        <!-- Lombok 用于简化 Java 代码开发，提供注解来生成常见的代码如 getter/setter -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+
+        <!-- Spring Boot 的单元测试依赖，包含常见的测试框架 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- MyBatis 的 Spring Boot 单元测试启动器，帮助进行 MyBatis 的相关测试 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter-test</artifactId>
             <version>3.0.3</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Spring Boot Web 启动器，提供构建 RESTful API 和 Web 应用的能力 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <!-- Spring Boot 校验启动器，提供数据验证功能 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
+        <!-- Java JWT (JSON Web Token) 库，用于生成和验证 JWT 令牌 -->
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>4.4.0</version>
         </dependency>
 
+        <!-- Spring Boot Redis 启动器，用于连接和操作 Redis 数据库 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+
+        <!-- Apache Commons Pool2 库，用于对象池的管理，如 Redis 连接池 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
+
+        <!-- Knife4j Swagger API 文档生成器，用于生成 OpenAPI 文档 -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
-            <version>4.4.0</version>
+            <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+            <version>4.1.0</version>
         </dependency>
+
+        <!-- PageHelper 分页插件的 Spring Boot 启动器，用于 MyBatis 分页 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.4.2</version>
         </dependency>
-        <!--spring cloud-->
+
+        <!-- Spring Cloud 依赖管理，提供服务注册、发现、负载均衡等能力 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-dependencies</artifactId>
@@ -129,7 +149,8 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
-        <!--spring cloud alibaba-->
+
+        <!-- Spring Cloud Alibaba 依赖管理，提供 Nacos、Sentinel 等功能 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -137,7 +158,15 @@
             <type>pom</type>
             <scope>import</scope>
         </dependency>
+
+        <!-- JSR 303 标准的验证 API，用于数据校验 -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
     </dependencies>
+
 
     <build>
         <plugins>

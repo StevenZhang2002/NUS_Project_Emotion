@@ -4,8 +4,8 @@ import com.example.demo.common.Entity.PageBean;
 import com.example.demo.common.Entity.Post;
 import com.example.demo.common.Utils.Result;
 import com.example.demo.post.Service.PostService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +16,14 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/post")
-@Tag(name = "朋友圈相关接口")
+@Api(tags = "朋友圈相关接口")
 public class PostController {
 
     @Autowired
     private PostService postService;
 
     //发布朋友圈内容
-    @Operation(summary = "发布朋友圈内容")
+    @ApiOperation("发布朋友圈内容")
     @PostMapping("/release")
     public Result addPost(@RequestBody Post post) {
         log.info("发布朋友圈内容：{}", post);
@@ -32,7 +32,7 @@ public class PostController {
     }
 
     //分页查询朋友圈内容
-    @Operation(summary = "分页查询朋友圈内容")
+    @ApiOperation("分页查询朋友圈内容")
     @GetMapping("/check")
     public Result page(@RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "10") Integer pageSize) {

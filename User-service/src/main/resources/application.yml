@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: User-service
+  cloud:
+    nacos:
+      server-addr: 13.251.129.185:29781 # nacos地址
   datasource:
     url: jdbc:mysql://localhost:3306/nusteamproject1
     username: root
@@ -13,23 +16,21 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-# springdoc-openapi项目配置
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-    tags-sorter: alpha
-    operations-sorter: alpha
-  api-docs:
-    path: /v3/api-docs
-  group-configs:
-    - group: 'default'
-      paths-to-match: '/**'
-      packages-to-scan: com.example.demo.Controller
-# knife4j的增强配置，不需要增强可以不配
 knife4j:
   enable: true
-  setting:
-    language: zh_cn
+  openapi:
+    title: 商品服务接口文档
+    description: "信息"
+    email: zhanghuyi@itcast.cn
+    concat: 虎哥
+    url: https://www.itcast.cn
+    version: v1.0.0
+    group:
+      default:
+        group-name: default
+        api-rule: package
+        api-rule-resources:
+          - com.example.demo.user.Controller
 
 
 

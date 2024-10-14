@@ -13,17 +13,21 @@
     <artifactId>Record-service</artifactId>
 
     <dependencies>
+        <!-- 项目内部公共模块依赖，用于复用 Md-common 模块中的公共功能 -->
         <dependency>
             <groupId>iss.team</groupId>
             <artifactId>Md-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
+        <!-- Nacos 服务注册发现启动器，用于将服务注册到 Nacos 注册中心，提供服务发现功能 -->
         <dependency>
-            <groupId>iss.team</groupId>
-            <artifactId>User-service</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <version>2021.0.4.0</version>
         </dependency>
     </dependencies>
+
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
