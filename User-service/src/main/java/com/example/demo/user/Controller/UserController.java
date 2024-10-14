@@ -1,15 +1,15 @@
 package com.example.demo.user.Controller;
 
 
-import com.example.demo.common.DTO.UserDTO;
 import com.example.demo.common.Entity.User;
+import com.example.demo.user.DTO.UserDTO;
 import com.example.demo.common.Utils.JwtUtil;
 import com.example.demo.common.Utils.Result;
 import com.example.demo.user.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import org.springframework.util.DigestUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,14 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
 @Tag(name = "用户相关接口")
+@RequiredArgsConstructor
 public class UserController {
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     @Operation(summary = "增加用户")
     @PostMapping("/addUser")
@@ -56,9 +56,6 @@ public class UserController {
         }
         return Result.error("Invalid Account");
     }
-
-
-
 
 
 //    @PostMapping("/changePassword")
