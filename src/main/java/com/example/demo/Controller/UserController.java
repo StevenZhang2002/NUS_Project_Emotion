@@ -6,6 +6,8 @@ import com.example.demo.Service.UserService;
 import com.example.demo.Utils.JwtUtil;
 import com.example.demo.Utils.Result;
 import com.example.demo.Utils.ThreadLocalUtil;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -23,15 +25,16 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "用户相关接口")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     private final JwtUtil jwtUtil = new JwtUtil();
-
     private final ThreadLocalUtil threadLocalUtil = new ThreadLocalUtil();
 
+    @Operation(summary = "增加用户")
     @PostMapping("/addUser")
     public Result addUser(@ModelAttribute @Validated UserDTO userDTO, @RequestParam MultipartFile avatorPic) throws IOException {
         byte[] avator = avatorPic.getBytes();
@@ -43,6 +46,7 @@ public class UserController {
         return Result.success();
     }
 
+    @Operation(summary = "登录功能")
     @GetMapping("/login")
     public Result login(@RequestParam String email, @RequestParam String password){
         User user = userService.getUserByEmail(email);
@@ -80,16 +84,4 @@ public class UserController {
 
         return Result.success("Logout success");
     }
-
-
-
-
-
-//    @PostMapping("/changePassword")
-//    public Result changePassword(@RequestParam int Email,
-//                                 @RequestParam String oldPassword,
-//                                 @RequestParam String newPassword){
-//
-//    }
-
 }
