@@ -6,7 +6,7 @@ spring:
     name: Friendship-service
   cloud:
     nacos:
-      server-addr: 13.251.129.185:29781 # nacos地址
+      server-addr: 192.168.201.128:8848
   datasource:
     url: jdbc:mysql://localhost:3306/nusteamproject1
     username: root
@@ -32,5 +32,9 @@ knife4j:
         api-rule-resources:
           - com.example.demo.friendship.Controller
 
+#logging:
+#  level:
+#    org.springframework.cloud.openfeign: DEBUG
+#    com.alibaba.cloud.nacos: DEBUG
 
 
