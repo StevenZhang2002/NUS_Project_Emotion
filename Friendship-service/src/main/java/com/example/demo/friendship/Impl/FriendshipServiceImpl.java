@@ -3,15 +3,14 @@ package com.example.demo.friendship.Impl;
 import com.example.demo.common.Entity.Friendship;
 import com.example.demo.friendship.Mapper.FriendshipMapper;
 import com.example.demo.friendship.Service.FriendshipService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class FriendshipServiceImpl implements FriendshipService {
-    @Autowired
-    FriendshipMapper friendshipMapper;
 
-
+    private final FriendshipMapper friendshipMapper;
 
     @Override
     public void buildFriendship(int userId1, int userId2) {
@@ -27,7 +26,4 @@ public class FriendshipServiceImpl implements FriendshipService {
     public Friendship getFriendshipByTwoUserId(int userId1, int userId2) {
         return friendshipMapper.GetFriendshipByTwoUserId(userId1,userId2);
     }
-
-
-
 }

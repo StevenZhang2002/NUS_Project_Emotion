@@ -1,11 +1,12 @@
 package com.example.demo.friendship.Controller;
 
+import com.example.demo.common.Entity.User;
 import com.example.demo.friendship.Service.FriendshipService;
 import com.example.demo.user.Service.UserService;
 import com.example.demo.common.Utils.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,17 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/friendship")
 @Tag(name = "好友关系相关接口")
+@RequiredArgsConstructor
 public class FriendshipController {
-    @Autowired
-    private FriendshipService friendshipService;
-    @Autowired
-    private UserService userService;
+
+    private final FriendshipService friendshipService;
+
+    private final UserService userService;
 
     @Operation(summary = "增加好友关系")
     @PostMapping("/BuildRelations")
     public Result BuildRelations(@RequestParam int userId1,@RequestParam int userId2){
-        if(userService.getUser(userId1)!=null&&userService.getUser(userId2)!=null){
-            if(friendshipService.getFriendshipByTwoUserId(userId1, userId2)==null){
+
+        User user1 = userService.getUser(userId1);
+        User user2 = userService.getUser(userId2);
+
+        if(user1 != null && user2 != null){
+            if(friendshipService.getFriendshipByTwoUserId(userId1, userId2) == null){
                 friendshipService.buildFriendship(userId1,userId2);
                 return Result.success();
             }
