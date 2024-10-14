@@ -2,7 +2,7 @@ package com.example.demo.user.Controller;
 
 
 import com.example.demo.common.Entity.User;
-import com.example.demo.user.DTO.UserDTO;
+import com.example.demo.common.DTO.UserDTO;
 import com.example.demo.common.Utils.JwtUtil;
 import com.example.demo.common.Utils.Result;
 import com.example.demo.user.Service.UserService;
@@ -56,6 +56,9 @@ public class UserController {
         }
         return Result.error("Invalid Account");
     }
+
+
+
 
 
 //    @PostMapping("/changePassword")
