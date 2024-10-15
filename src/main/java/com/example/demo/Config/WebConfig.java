@@ -36,6 +36,10 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 //        WebMvcConfigurer.super.addInterceptors(registry);
         registry.addInterceptor(loginInterceptor)
-                .excludePathPatterns("/users/login","/users/addUser");
+                .excludePathPatterns("/users/login","/users/addUser","/doc.html",
+                        "/v3/api-docs/**",    // OpenAPI 3 文档路径
+                        "/swagger-ui/**",     // Swagger UI 静态资源
+                        "/swagger-resources/**", // Swagger 资源路径
+                        "/webjars/**" );
     }
 }

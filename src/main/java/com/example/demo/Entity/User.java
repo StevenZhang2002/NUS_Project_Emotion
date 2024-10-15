@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @Getter
@@ -30,4 +31,5 @@ public class User {
     Timestamp updatedAt;
     @NotEmpty
     private byte[]avator;
+    List<Address> addresses;
 }
