@@ -6,6 +6,7 @@ import com.example.demo.Utils.Result;
 import com.example.demo.Entity.PageBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class PostController {
     //发布朋友圈内容
     @Operation(summary = "发布朋友圈内容")
     @PostMapping("/release")
-    public Result addPost(@RequestBody Post post) {
+    public Result addPost(@Valid @RequestBody Post post) {
         log.info("发布朋友圈内容：{}", post);
         postService.addPost(post);
         return Result.success();

@@ -8,6 +8,7 @@ public class Result<T> {
     private String message;
     private T data;
 
+    public Result() {}
 
     public Result(Integer code, String message, T data) {
         this.code = code;
