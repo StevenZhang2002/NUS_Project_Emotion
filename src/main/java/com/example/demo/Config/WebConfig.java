@@ -36,6 +36,6 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 //        WebMvcConfigurer.super.addInterceptors(registry);
         registry.addInterceptor(loginInterceptor)
-                .excludePathPatterns("/users/login","users/adduser");
+                .excludePathPatterns("/users/login","/users/addUser");
     }
 }
