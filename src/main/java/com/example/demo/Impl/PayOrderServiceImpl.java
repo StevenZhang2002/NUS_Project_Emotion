@@ -2,12 +2,14 @@ package com.example.demo.Impl;
 
 import com.example.demo.DTO.OrderDTO;
 import com.example.demo.DTO.PointDTO;
+import com.example.demo.DTO.PointsTransactionDTO;
 import com.example.demo.DTO.ProductDTO;
 import com.example.demo.Mapper.PayOrderMapper;
 import com.example.demo.Mapper.PointsMapper;
 import com.example.demo.Mapper.ProductsMapper;
 import com.example.demo.Service.PayOrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,13 @@ public class PayOrderServiceImpl implements PayOrderService {
     @Autowired
     private PayOrderMapper payOrderMapper;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    private static final String EXCHANGE = "points.exchange";
+
+    private static final String ROUTING_KEY = "points.routingkey";
+
     @Transactional
     public OrderDTO createPayOrder(Integer userId, Integer productId, Integer quantity) {
         // 1. 查询商品信息
@@ -37,13 +46,13 @@ public class PayOrderServiceImpl implements PayOrderService {
             throw new RuntimeException("商品库存不足");
         }
 
-        // 2.. 查询用户积分信息
+        // 2. 查询用户积分信息
         PointDTO userPoints = pointsMapper.selectPointDTOByUserId(userId);
         if (userPoints == null || userPoints.getPointsBalance() < (product.getPointsCost())*quantity) {
             throw new RuntimeException("用户积分不足");
         }
 
-        //3.扣减商品库存
+        //3. 扣减商品库存
         int productsStock = product.getStock() - quantity;
         productsMapper.setProductsStock(productsStock,productId);
 
@@ -58,10 +67,19 @@ public class PayOrderServiceImpl implements PayOrderService {
         order.setProductId(productId);
         order.setQuantity(quantity);
         order.setTotalPoints((product.getPointsCost())*quantity);
-        order.setCreatedAt(new Timestamp(System.currentTimeMillis()));
 
         // 6. 保存订单
         payOrderMapper.insertOrder(order);
+
+        // 7.构建 PointsTransactionDTO 并发送到消息队列
+        PointsTransactionDTO transaction = new PointsTransactionDTO();
+        transaction.setUserId(userId);
+        transaction.setChangeAmount(-product.getPointsCost() * quantity); // 消耗积分
+        transaction.setTransactionType("Spend");
+        transaction.setDescription("购买商品");
+
+        // 发送消息到 RabbitMQ
+        rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, transaction);
 
         return order;  // 返回生成的订单信息
         }

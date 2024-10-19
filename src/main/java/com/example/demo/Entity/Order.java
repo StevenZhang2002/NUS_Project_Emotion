@@ -2,7 +2,7 @@ package com.example.demo.Entity;
 
 import lombok.Data;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 @Data
 public class Order {

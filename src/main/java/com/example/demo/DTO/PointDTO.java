@@ -10,7 +10,6 @@ public class PointDTO {
     private Integer pointsId;
     private Integer userId;
     private Integer pointsBalance;
-    private Timestamp updatedAt;
 
 
 }

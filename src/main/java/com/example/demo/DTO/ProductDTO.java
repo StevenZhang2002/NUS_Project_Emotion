@@ -11,6 +11,4 @@ public class ProductDTO {
     private String productDescription;
     private Integer pointsCost;
     private Integer stock;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
 }

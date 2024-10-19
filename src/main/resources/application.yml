@@ -1,6 +1,12 @@
 spring:
   application:
     name: demo
+  rabbitmq:
+    host: 13.251.129.185
+    port: 31681
+    virtual-host: md
+    username: md
+    password: 123
 
   datasource:
     url: jdbc:mysql://localhost:3306/nusteamproject1

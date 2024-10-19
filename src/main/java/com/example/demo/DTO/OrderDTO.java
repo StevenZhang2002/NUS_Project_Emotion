@@ -11,5 +11,4 @@ public class OrderDTO {
     private Integer productId;
     private Integer quantity;
     private Integer totalPoints;
-    private Timestamp createdAt;
 }

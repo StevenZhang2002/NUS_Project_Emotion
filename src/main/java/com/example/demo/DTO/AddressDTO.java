@@ -13,6 +13,4 @@ public class AddressDTO {
     private String state;
     private String postalCode;
     private String country;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
 }
