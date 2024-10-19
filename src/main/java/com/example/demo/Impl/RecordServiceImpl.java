@@ -2,6 +2,7 @@ package com.example.demo.Impl;
 
 import com.example.demo.DTO.IntensityDTO;
 import com.example.demo.DTO.MoodHistoryDTO;
+import com.example.demo.Entity.Record;
 import com.example.demo.Mapper.RecordMapper;
 import com.example.demo.Service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,5 +29,12 @@ public class RecordServiceImpl implements RecordService{
     public List<IntensityDTO> getIntensity(int type, int userId) {
 
         return recordMapper.getIntensity(type,userId);
+    }
+
+    @Override
+    public void addRecord(Record record) {
+        recordMapper.addRecord(record.getUserId(),record.getTitle(),record.getContent());
+//       需要用到kafka调用接口 localhost:5000/Sentiment/
+
     }
 }
