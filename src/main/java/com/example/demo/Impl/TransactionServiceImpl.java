@@ -15,9 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class TransactionServiceImpl implements TransactionService {
 
     @Autowired
-    private PointsMapper pointsMapper;
-
-    @Autowired
     private TransactionMapper transactionMapper;
 
     @RabbitListener(queues = "points.queue")
