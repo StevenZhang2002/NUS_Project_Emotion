@@ -4,6 +4,7 @@ import com.example.demo.DTO.OrderDTO;
 import com.example.demo.DTO.PointDTO;
 import com.example.demo.DTO.PointsTransactionDTO;
 import com.example.demo.DTO.ProductDTO;
+import com.example.demo.Mapper.AddressMapper;
 import com.example.demo.Mapper.PayOrderMapper;
 import com.example.demo.Mapper.PointsMapper;
 import com.example.demo.Mapper.ProductsMapper;
@@ -32,18 +33,25 @@ public class PayOrderServiceImpl implements PayOrderService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    @Autowired
+    private AddressMapper addressMapper;
+
     private static final String EXCHANGE = "points.exchange";
 
     private static final String ROUTING_KEY = "points.routingkey";
 
     @Transactional
-    public OrderDTO createPayOrder(Integer userId, Integer productId, Integer quantity) {
+    public OrderDTO createPayOrder(Integer userId, Integer productId, Integer quantity, int addressId) {
         // 1. 查询商品信息
         ProductDTO product = productsMapper.selectProductDTOById(productId);
         if (product == null) {
             throw new RuntimeException("商品不存在");
         } else if (product.getStock() < quantity) {
             throw new RuntimeException("商品库存不足");
+        }
+
+        if (addressMapper.getAddressById(addressId)==null){
+            throw new RuntimeException("Invalid Address");
         }
 
         // 2. 查询用户积分信息
@@ -67,6 +75,7 @@ public class PayOrderServiceImpl implements PayOrderService {
         order.setProductId(productId);
         order.setQuantity(quantity);
         order.setTotalPoints((product.getPointsCost())*quantity);
+        order.setAddressId(addressId);
 
         // 6. 保存订单
         payOrderMapper.insertOrder(order);
