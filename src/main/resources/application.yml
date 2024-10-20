@@ -16,6 +16,7 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # springdoc-openapi项目配置
 springdoc:

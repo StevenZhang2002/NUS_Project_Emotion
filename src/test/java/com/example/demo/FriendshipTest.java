@@ -42,7 +42,7 @@ public class FriendshipTest {
         // 模拟 POST 请求
         mockMvc.perform(MockMvcRequestBuilders.post("/friendship/BuildRelations")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjUsImVtYWlsIjoiMTQ2ODc0MDMzMUBxcS5jb20ifSwiZXhwIjoxNzI5MDIzMjQ4fQ.OPmAOtW2k-k93G_inZOXxBkq8libNBUKJc4RfwP4B7I")
+                        .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjUsImVtYWlsIjoiMTQ2ODc0MDMzMUBxcS5jb20ifSwiZXhwIjoxNzI5NDczNTU0fQ.Nmo4JTME8nbUcDttYDwZ2TKGOG2auQGyCcLCZqXdUkw")
                         .param("userId1", "1")
                         .param("userId2", "3"))
                 .andExpect(status().isOk())
@@ -58,7 +58,7 @@ public class FriendshipTest {
         // 模拟 POST 请求
         mockMvc.perform(MockMvcRequestBuilders.post("/friendship/BuildRelations")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjUsImVtYWlsIjoiMTQ2ODc0MDMzMUBxcS5jb20ifSwiZXhwIjoxNzI5MDIzMjQ4fQ.OPmAOtW2k-k93G_inZOXxBkq8libNBUKJc4RfwP4B7I")
+                        .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjUsImVtYWlsIjoiMTQ2ODc0MDMzMUBxcS5jb20ifSwiZXhwIjoxNzI5NDczNTU0fQ.Nmo4JTME8nbUcDttYDwZ2TKGOG2auQGyCcLCZqXdUkw")
                         .param("userId1", "0")
                         .param("userId2", "2"))
                 .andExpect(status().isOk())
@@ -81,7 +81,7 @@ public class FriendshipTest {
         // 模拟 POST 请求
         mockMvc.perform(MockMvcRequestBuilders.post("/friendship/BuildRelations")
                         .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                        .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjUsImVtYWlsIjoiMTQ2ODc0MDMzMUBxcS5jb20ifSwiZXhwIjoxNzI5MDIzMjQ4fQ.OPmAOtW2k-k93G_inZOXxBkq8libNBUKJc4RfwP4B7I")
+                        .header("Authorization", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGFpbXMiOnsiaWQiOjUsImVtYWlsIjoiMTQ2ODc0MDMzMUBxcS5jb20ifSwiZXhwIjoxNzI5NDczNTU0fQ.Nmo4JTME8nbUcDttYDwZ2TKGOG2auQGyCcLCZqXdUkw")
                         .param("userId1", "1")
                         .param("userId2", "2"))
                 .andExpect(status().isOk())

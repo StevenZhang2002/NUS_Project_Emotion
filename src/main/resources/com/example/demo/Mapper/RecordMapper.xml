@@ -3,36 +3,40 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.Mapper.RecordMapper">
+    <!-- 查询心情历史 -->
     <select id="getMoodHistory" resultType="com.example.demo.DTO.MoodHistoryDTO">
-        select userId,recordId,Mood,createdAt from record
+        SELECT userId, recordId, mood, createdAt
+        FROM record
         <where>
-            <if test="type==1">
-                DATE(createdAt) = CURDATE()
+            <if test="type == 1">
+                AND DATE(createdAt) = CURDATE()
             </if>
-            <if test="type==2">
-                WEEK(createdAt) = WEEK(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
+            <if test="type == 2">
+                AND WEEK(createdAt) = WEEK(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
             </if>
-            <if test="type==3">
-                MONTH(createdAt) = MONTH(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
+            <if test="type == 3">
+                AND MONTH(createdAt) = MONTH(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
             </if>
-            AND userId = #{userId} ORDER BY createdAt ASC;
+            AND userId = #{userId}
         </where>
-
-
+        ORDER BY createdAt ASC;
     </select>
+
+    <!-- 查询帖子数量 -->
     <select id="getIntensity" resultType="com.example.demo.DTO.IntensityDTO">
-        SELECT DATE(createdAt) AS date, COUNT(*) AS post_count
-        FROM Record
+        SELECT DATE(createdAt) AS date, COUNT(*) AS postCount
+        FROM record
         <where>
-        userId = #{userId}
-        <if test="type==1">
-        AND WEEK(createdAt) = WEEK(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
-        </if>
-        <if test="type==2">
-            AND MONTH(createdAt) = MONTH(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
-        </if>
+            userId = #{userId}
+            <if test="type == 1">
+                AND WEEK(createdAt) = WEEK(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
+            </if>
+            <if test="type == 2">
+                AND MONTH(createdAt) = MONTH(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
+            </if>
         </where>
-        GROUP BY DATE(createdAt) ORDER BY DATE(createdAt);
+        GROUP BY DATE(createdAt)
+        ORDER BY DATE(createdAt);
     </select>
 
 </mapper>
