@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
 
+import cn.hutool.json.JSON;
 import com.example.demo.DTO.MoodHistoryDTO;
+import com.example.demo.Entity.Record;
 import com.example.demo.Service.RecordService;
 import com.example.demo.Utils.Result;
 import com.example.demo.Utils.ThreadLocalUtil;
@@ -22,13 +24,15 @@ public class RecordController {
     RecordService recordService;
 
 
-//    @Operation(summary = "记录笔记")
-//    @PostMapping
-//    public Result addRecord(@Validated@RequestBody Record record) {
-//        Map<String, Object> claims = ThreadLocalUtil.get();
-//        int userId = (int)claims.get("id");
-//
-//    }
+    @Operation(summary = "记录笔记")
+    @PostMapping("/add")
+    public Result addRecord(@Validated @RequestBody Record record) {
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        int userId = (int)claims.get("id");
+        record.setUserId(userId);
+        recordService.addRecord(record);
+        return Result.success();
+    }
 
 
     @Operation(summary = "获取心情历史记录")
