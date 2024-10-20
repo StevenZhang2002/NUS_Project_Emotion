@@ -24,7 +24,7 @@ public class RecordServiceImpl implements RecordService{
     private RabbitTemplate rabbitTemplate;
 
 
-    private static final String EXCHANGE = "record.exchange";
+    private static final String EXCHANGE = "points.exchange";
 
     private static final String ROUTING_KEY = "record.routingkey";
 
@@ -43,7 +43,6 @@ public class RecordServiceImpl implements RecordService{
     @Override
     public void addRecord(Record record) {
         recordMapper.addRecord(record.getUserId(),record.getTitle(),record.getContent());
-//       需要用到kafka调用接口 localhost:5000/Sentiment/
         // 发送消息到 RabbitMQ
         rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, record);
 
