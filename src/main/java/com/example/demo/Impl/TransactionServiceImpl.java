@@ -1,7 +1,6 @@
 package com.example.demo.Impl;
 
 import com.example.demo.DTO.PointsTransactionDTO;
-import com.example.demo.Mapper.PointsMapper;
 import com.example.demo.Mapper.TransactionMapper;
 import com.example.demo.Service.TransactionService;
 import lombok.extern.slf4j.Slf4j;

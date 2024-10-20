@@ -61,9 +61,9 @@ public class RabbitMQConfig {
         return rabbitTemplate;
     }
 
-    // 配置监听器适配器使用 Jackson2JsonMessageConverter
-    @Bean
-    public MessageListenerAdapter messageListenerAdapter(TransactionServiceImpl transactionService) {
-        return new MessageListenerAdapter(transactionService, jackson2JsonMessageConverter());
-    }
+//    // 配置监听器适配器使用 Jackson2JsonMessageConverter
+//    @Bean
+//    public MessageListenerAdapter messageListenerAdapter(TransactionServiceImpl transactionService) {
+//        return new MessageListenerAdapter(transactionService, jackson2JsonMessageConverter());
+//    }
 }
