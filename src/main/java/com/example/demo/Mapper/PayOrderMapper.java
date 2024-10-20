@@ -9,8 +9,8 @@ import org.apache.ibatis.annotations.Options;
 public interface PayOrderMapper {
 
     // 插入支付单记录
-    @Insert("insert into orders (userId, productId, quantity, totalPoints) " +
-            "values (#{userId}, #{productId}, #{quantity}, #{totalPoints})")
+    @Insert("insert into orders (userId, productId, quantity, totalPoints, addressId) " +
+            "values (#{userId}, #{productId}, #{quantity}, #{totalPoints},#{addressId})")
     @Options(useGeneratedKeys = true, keyProperty = "orderId")
     int insertOrder(OrderDTO orderDTO);
 }

@@ -13,4 +13,5 @@ public class Order {
     private Integer quantity;
     private Integer totalPoints;
     private Timestamp createdAt;
+    private Integer addressId;
 }

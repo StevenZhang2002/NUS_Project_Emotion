@@ -29,11 +29,11 @@ public class PayOrderController {
     // 生成支付单并完成支付
     @Operation(summary = "生成支付单并扣减积分")
     @PostMapping("/create")
-    public Result createPayOrder(@RequestParam Integer productId, @RequestParam Integer quantity) {
+    public Result createPayOrder(@RequestParam Integer productId, @RequestParam Integer quantity, int addressId) {
         Map<String, Object> claims = ThreadLocalUtil.get();
             Integer userId = Convert.toInt(claims.get("id"));
-        log.info("生成支付单：用户ID={}, 商品ID={}, 商品数量={}", userId, productId, quantity);
-        OrderDTO order = payOrderService.createPayOrder(userId, productId,quantity);
+        log.info("生成支付单：用户ID={}, 商品ID={}, 商品数量={}, 地址Id={}", userId, productId, quantity, addressId);
+        OrderDTO order = payOrderService.createPayOrder(userId, productId,quantity, addressId);
         return Result.success(order);
     }
 }

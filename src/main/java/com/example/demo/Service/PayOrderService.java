@@ -4,5 +4,5 @@ import com.example.demo.DTO.OrderDTO;
 
 public interface PayOrderService {
 
-    OrderDTO createPayOrder(Integer userId, Integer productId, Integer quantity);
+    OrderDTO createPayOrder(Integer userId, Integer productId, Integer quantity, int addressId);
 }
