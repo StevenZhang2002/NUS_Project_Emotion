@@ -1,17 +1,17 @@
 package com.example.demo.Controller;
 
 
+import cn.hutool.json.JSON;
 import com.example.demo.DTO.MoodHistoryDTO;
+import com.example.demo.Entity.Record;
 import com.example.demo.Service.RecordService;
 import com.example.demo.Utils.Result;
 import com.example.demo.Utils.ThreadLocalUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +22,17 @@ import java.util.Map;
 public class RecordController {
     @Autowired
     RecordService recordService;
+
+
+    @Operation(summary = "记录笔记")
+    @PostMapping("/add")
+    public Result addRecord(@Validated @RequestBody Record record) {
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        int userId = (int)claims.get("id");
+        record.setUserId(userId);
+        recordService.addRecord(record);
+        return Result.success();
+    }
 
 
     @Operation(summary = "获取心情历史记录")

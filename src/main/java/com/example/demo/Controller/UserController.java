@@ -2,6 +2,7 @@ package com.example.demo.Controller;
 
 
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.DTO.UserLoginDTO;
 import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
 import com.example.demo.Utils.JwtUtil;
@@ -50,11 +51,11 @@ public class UserController {
     }
 
     @Operation(summary = "登录功能")
-    @GetMapping("/login")
-    public Result login(@RequestParam String email, @RequestParam String password){
-        User user = userService.getUserByEmail(email);
+    @PostMapping("/login")
+    public Result login(@RequestBody UserLoginDTO userDto){
+        User user = userService.getUserByEmail(userDto.getEmail());
         if(user!=null){
-            if(user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))){
+            if(user.getPassword().equals(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()))){
                 Map<String, Object>claims = new HashMap<>();
                 claims.put("email", user.getEmail());
                 claims.put("id",user.getUserId());

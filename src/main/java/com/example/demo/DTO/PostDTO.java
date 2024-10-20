@@ -7,7 +7,5 @@ public class PostDTO {
     int postId;
     int recordId;
     int userId;
-    Timestamp createAt;
-    Timestamp updateAt;
 
 }
