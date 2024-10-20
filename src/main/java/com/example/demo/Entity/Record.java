@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Record {
     private Integer recordId;
     private Integer userId;
