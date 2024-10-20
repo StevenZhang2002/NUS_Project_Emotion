@@ -34,7 +34,7 @@ public class RecordServiceImpl implements RecordService{
     @Override
     public void addRecord(Record record) {
         recordMapper.addRecord(record.getUserId(),record.getTitle(),record.getContent());
-//       需要用到kafka调用接口 localhost:5000/Sentiment/
+
 
     }
 }

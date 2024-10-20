@@ -1,5 +1,6 @@
 package com.example.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
@@ -17,5 +18,6 @@ public class Record {
     private Integer mood;
     private Timestamp createdAt;
     private Timestamp updatedAt;
+    @JsonIgnore
     List<Photo> photoList;
 }
