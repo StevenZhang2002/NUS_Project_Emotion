@@ -1,6 +1,7 @@
 package com.example.demo.Impl;
 
 import com.example.demo.DTO.PointsTransactionDTO;
+import com.example.demo.Entity.PageBean;
 import com.example.demo.Mapper.TransactionMapper;
 import com.example.demo.Service.TransactionService;
 import lombok.extern.slf4j.Slf4j;
@@ -8,6 +9,8 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -37,6 +40,21 @@ public class TransactionServiceImpl implements TransactionService {
 
         // 2. 保存交易记录
         transactionMapper.insertTransaction(transaction);
+    }
+
+
+    @Override
+    public PageBean page(int userId, Integer page, Integer pageSize) {
+        //1、获取总记录数
+        Long count = transactionMapper.count();
+
+        //2、获取分页查询结果列表
+        Integer start = (page - 1) * pageSize; //计算起始索引 , 公式: (页码-1)*页大小
+        List<PointsTransactionDTO> empList = transactionMapper.list(userId,start, pageSize);
+
+        //3、封装PageBean对象
+        PageBean pageBean = new PageBean(count , empList);
+        return pageBean;
     }
 }
 
