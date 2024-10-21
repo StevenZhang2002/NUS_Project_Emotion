@@ -2,10 +2,14 @@ package com.example.demo.Controller;
 
 
 import com.example.demo.DTO.UserDTO;
+import com.example.demo.DTO.UserLoginDTO;
 import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
 import com.example.demo.Utils.JwtUtil;
 import com.example.demo.Utils.Result;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import com.example.demo.Utils.ThreadLocalUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -22,11 +26,28 @@ import java.util.Objects;
 
 @RestController
 @RequestMapping("/users")
+@Tag(name = "用户相关接口")
+
+
+/**
+ * 用户名加密
+ *
+ */
 public class UserController {
+
+
+
     @Autowired
     private UserService userService;
 
 
+//    @PostMapping("/ResetPwd")
+//    public Result ResetPwd() {
+//        Map<String, Object> result = ThreadLocalUtil.get();
+//    }
+
+
+    @Operation(summary = "增加用户")
     @PostMapping("/addUser")
     public Result addUser(@ModelAttribute @Validated UserDTO userDTO, @RequestParam MultipartFile avatorPic) throws IOException {
         byte[]avator = avatorPic.getBytes();
@@ -38,11 +59,12 @@ public class UserController {
         return Result.success();
     }
 
-    @GetMapping("/login")
-    public Result login(@RequestParam String email, @RequestParam String password){
-        User user = userService.getUserByEmail(email);
+    @Operation(summary = "登录功能")
+    @PostMapping("/login")
+    public Result login(@ModelAttribute UserLoginDTO userDto){
+        User user = userService.getUserByEmail(userDto.getEmail());
         if(user!=null){
-            if(user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))){
+            if(user.getPassword().equals(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()))){
                 Map<String, Object>claims = new HashMap<>();
                 claims.put("email", user.getEmail());
                 claims.put("id",user.getUserId());

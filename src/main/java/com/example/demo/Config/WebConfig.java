@@ -2,13 +2,14 @@ package com.example.demo.Config;
 
 import com.example.demo.Interceptor.LoginInterceptor;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.info.Contact;
+
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
@@ -31,12 +32,14 @@ public class WebConfig implements WebMvcConfigurer {
 
     }
 
-
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 //        WebMvcConfigurer.super.addInterceptors(registry);
         registry.addInterceptor(loginInterceptor)
-                .excludePathPatterns("/users/login","/users/addUser");
+                .excludePathPatterns("/users/login","/users/addUser","/doc.html",
+                        "/v3/api-docs/**",    // OpenAPI 3 文档路径
+                        "/swagger-ui/**",     // Swagger UI 静态资源
+                        "/swagger-resources/**", // Swagger 资源路径
+                        "/webjars/**" );
     }
 }

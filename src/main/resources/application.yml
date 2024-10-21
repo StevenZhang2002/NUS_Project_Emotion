@@ -1,8 +1,18 @@
 spring:
   application:
     name: demo
-
-
+  data:
+    redis:
+      host: 192.168.245.128
+      port: 6379
+      password: 123321
+      database: 0
+  rabbitmq:
+    host: 13.251.129.185
+    port: 31681
+    virtual-host: md
+    username: md
+    password: 123
   datasource:
     url: jdbc:mysql://mysql:3306/nusteamproject1
     username: root
@@ -11,4 +21,25 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
+
+# springdoc-openapi项目配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.example.demo.Controller
+# knife4j的增强配置，不需要增强可以不配
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+
+
+
 
