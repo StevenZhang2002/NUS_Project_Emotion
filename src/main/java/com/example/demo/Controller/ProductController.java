@@ -37,7 +37,7 @@ public class ProductController {
         try {
             productList = redisTemplate.opsForValue().get(PRODUCTS_CACHE_KEY);
             if (productList != null && !productList.isEmpty()) {
-                System.out.println("从缓存中取出数据");
+                System.out.println("从缓存中取出数据：" + productList);
                 return productList; // 如果缓存中有数据，直接返回
             }
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class ProductController {
         // 查询完数据库后，将结果存入缓存
         if (productList != null && !productList.isEmpty()) {
             // 设置缓存过期时间
-            redisTemplate.opsForValue().set(PRODUCTS_CACHE_KEY, productList, 1, TimeUnit.HOURS);
+            redisTemplate.opsForValue().set(PRODUCTS_CACHE_KEY, productList, 15, TimeUnit.MINUTES);
         }
 
         return productList;

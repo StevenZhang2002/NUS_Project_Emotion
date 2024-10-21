@@ -3,13 +3,13 @@ spring:
     name: demo
   data:
     redis:
-      host: 192.168.245.128
-      port: 6379
-      password: 123321
+      host: 47.129.197.205
+      port: 30007
+      password: JqA5i2JrtjpHTYDHiEDT
       database: 0
   rabbitmq:
-    host: 13.251.129.185
-    port: 31681
+    host: 47.129.197.205
+    port: 30272
     virtual-host: md
     username: md
     password: 123

@@ -9,7 +9,5 @@ public interface RecordService {
 
     public List<MoodHistoryDTO> getMoodHistory(int type,int userId);
 
-//    public List<IntensityDTO>getIntensity(IntensityDTO intensityDTO);
-
     public void addRecord(Record record);
 }

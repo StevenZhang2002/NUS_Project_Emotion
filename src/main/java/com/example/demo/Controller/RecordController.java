@@ -1,6 +1,7 @@
 package com.example.demo.Controller;
 
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSON;
 import com.example.demo.DTO.MoodHistoryDTO;
 import com.example.demo.Entity.Record;
@@ -27,7 +28,7 @@ public class RecordController {
     @PostMapping("/add")
     public Result addRecord(@Validated @RequestBody Record record) {
         Map<String, Object> claims = ThreadLocalUtil.get();
-        int userId = (int)claims.get("id");
+        Integer userId = Convert.toInt(claims.get("id"));
         record.setUserId(userId);
         recordService.addRecord(record);
         return Result.success();
@@ -38,7 +39,7 @@ public class RecordController {
     public Result getMoodHistory(@RequestParam int queryPeriod){
 //        1：当天；2：本周；3：本月。
         Map<String, Object> claims = ThreadLocalUtil.get();
-        int userId = (int)claims.get("id");
+        Integer userId = Convert.toInt(claims.get("id"));
         List<MoodHistoryDTO> result = recordService.getMoodHistory(queryPeriod,userId);
         return Result.success(result);
     }
