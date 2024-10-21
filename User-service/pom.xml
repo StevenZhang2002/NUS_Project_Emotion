@@ -7,7 +7,7 @@
         <groupId>iss.team</groupId>
         <artifactId>user-service</artifactId>
         <version>1.0-SNAPSHOT</version>
-             <relativePath>./pom.xml</relativePath> <!-- 修改为实际路径 -->
+             <relativePath>../pom.xml</relativePath> <!-- 修改为实际路径 -->
     </parent>
 
     <groupId>iss.team</groupId>
