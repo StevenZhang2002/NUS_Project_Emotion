@@ -23,7 +23,6 @@ public class RecordController {
     @Autowired
     RecordService recordService;
 
-
     @Operation(summary = "记录笔记")
     @PostMapping("/add")
     public Result addRecord(@Validated @RequestBody Record record) {
@@ -33,7 +32,6 @@ public class RecordController {
         recordService.addRecord(record);
         return Result.success();
     }
-
 
     @Operation(summary = "获取心情历史记录")
     @GetMapping("/History")
@@ -45,16 +43,12 @@ public class RecordController {
         return Result.success(result);
     }
 
-    @Operation(summary = "心情活跃度统计")
-    @GetMapping("/Intensity/")
-    public Result getIntensity(@RequestParam int queryPeriod){
-//        1: 本周；2：本月
-        Map<String, Object> claims = ThreadLocalUtil.get();
-        int userId = (int)claims.get("id");
-        return Result.success(recordService.getIntensity(queryPeriod,userId));
-    }
-
-
-
-
+//    @Operation(summary = "心情活跃度统计")
+//    @GetMapping("/Intensity/")
+//    public Result getIntensity(@RequestParam int queryPeriod){
+////        1: 本周；2：本月
+//        Map<String, Object> claims = ThreadLocalUtil.get();
+//        int userId = (int)claims.get("id");
+//        return Result.success(recordService.getIntensity(queryPeriod,userId));
+//    }
 }

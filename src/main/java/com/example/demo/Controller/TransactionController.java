@@ -47,7 +47,4 @@ public class TransactionController {
         return Result.success(pageBean);
 
     }
-
-
-
 }
