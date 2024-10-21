@@ -27,7 +27,16 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/users")
 @Tag(name = "用户相关接口")
+
+
+/**
+ * 用户名加密
+ *
+ */
 public class UserController {
+
+
+
     @Autowired
     private UserService userService;
 
@@ -52,7 +61,7 @@ public class UserController {
 
     @Operation(summary = "登录功能")
     @PostMapping("/login")
-    public Result login(@RequestBody UserLoginDTO userDto){
+    public Result login(@ModelAttribute UserLoginDTO userDto){
         User user = userService.getUserByEmail(userDto.getEmail());
         if(user!=null){
             if(user.getPassword().equals(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()))){

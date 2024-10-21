@@ -17,6 +17,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/post")
 @Tag(name = "朋友圈相关接口")
+
+/**
+ * 删除点赞（待定
+ */
+
 public class PostController {
 
     @Autowired

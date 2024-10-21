@@ -16,6 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ *  function： 监听 接受python处理回来的结果
+ *
+ *  add record: 加分
+ *
+ *
+ */
+
 @RestController
 @RequestMapping("/Record")
 @Tag(name = "日志记录相关接口")

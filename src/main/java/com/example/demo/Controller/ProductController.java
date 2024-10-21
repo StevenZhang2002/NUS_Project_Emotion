@@ -16,6 +16,10 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RequestMapping("/products")
 @Tag(name = "商品相关接口")
+/**
+ *
+ * 缺少 查找商品
+ */
 public class ProductController {
 
     @Autowired
