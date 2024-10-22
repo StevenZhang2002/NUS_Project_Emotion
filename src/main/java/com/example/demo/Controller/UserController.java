@@ -4,6 +4,9 @@ package com.example.demo.Controller;
 import com.example.demo.DTO.UserDTO;
 import com.example.demo.DTO.UserLoginDTO;
 import com.example.demo.Entity.User;
+import com.example.demo.Mapper.AddressMapper;
+import com.example.demo.Mapper.PointsMapper;
+import com.example.demo.Service.PointsService;
 import com.example.demo.Service.UserService;
 import com.example.demo.Utils.JwtUtil;
 import com.example.demo.Utils.Result;
@@ -13,6 +16,7 @@ import com.example.demo.Utils.ThreadLocalUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.util.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -31,6 +35,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PointsService pointsService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
+    private static final String EXCHANGE = "points.exchange";
+
+    private static final String ROUTING_KEY = "points.routingkey";
+
 
 //    @PostMapping("/ResetPwd")
 //    public Result ResetPwd() {
@@ -46,7 +60,8 @@ public class UserController {
             return Result.error("Account already exist");
         }
         String encryptedPassword = DigestUtils.md5DigestAsHex(userDTO.getPassword().getBytes());
-        userService.addUser(userDTO.getUsername(), encryptedPassword, userDTO.getEmail(), userDTO.getGender(), userDTO.getStatus(), avator);
+        int userId = userService.addUser(userDTO.getUsername(), encryptedPassword, userDTO.getEmail(), userDTO.getGender(), userDTO.getStatus(), avator);
+        pointsService.initiateScore(userId);
         return Result.success();
     }
 

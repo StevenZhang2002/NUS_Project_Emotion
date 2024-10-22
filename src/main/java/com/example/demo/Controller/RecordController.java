@@ -5,6 +5,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSON;
 import com.example.demo.DTO.MoodHistoryDTO;
 import com.example.demo.Entity.Record;
+import com.example.demo.Service.PointsService;
 import com.example.demo.Service.RecordService;
 import com.example.demo.Utils.Result;
 import com.example.demo.Utils.ThreadLocalUtil;
@@ -24,13 +25,17 @@ public class RecordController {
     @Autowired
     RecordService recordService;
 
+    @Autowired
+    private PointsService pointsService;
+
     @Operation(summary = "记录笔记")
     @PostMapping("/add")
     public Result addRecord(@Validated @RequestBody Record record) {
         Map<String, Object> claims = ThreadLocalUtil.get();
-        Integer userId = Convert.toInt(claims.get("id"));
+        Integer userId = (int)claims.get("id");
         record.setUserId(userId);
         recordService.addRecord(record);
+        pointsService.addPoints(userId,50);
         return Result.success();
     }
 

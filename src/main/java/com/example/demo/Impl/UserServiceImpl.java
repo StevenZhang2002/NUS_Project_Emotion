@@ -13,8 +13,10 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public void addUser(String username, String password, String email, String gender, String status, byte[] avator) {
-        userMapper.addUser(username, password, email, gender, status, avator);
+
+    public int addUser(String username, String password, String email, String gender, String status, byte[] avator) {
+        int userId = userMapper.addUser(username, password, email, gender, status, avator);
+        return userId;
 
     }
 
