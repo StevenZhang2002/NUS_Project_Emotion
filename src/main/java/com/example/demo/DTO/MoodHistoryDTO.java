@@ -8,6 +8,6 @@ import java.sql.Timestamp;
 public class MoodHistoryDTO {
     int userId;
     int recordId;
-    int mood;
+    String mood;
 
 }

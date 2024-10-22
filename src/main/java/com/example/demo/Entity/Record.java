@@ -17,7 +17,7 @@ public class Record {
     private String title;
     @NotEmpty
     private String content;
-    private Integer mood;
+    private String mood;
     private Timestamp createdAt;
     private Timestamp updatedAt;
     @JsonIgnore
