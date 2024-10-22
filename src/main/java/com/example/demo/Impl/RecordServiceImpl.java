@@ -1,5 +1,6 @@
 package com.example.demo.Impl;
 
+import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.example.demo.DTO.IntensityDTO;
 import com.example.demo.DTO.MoodHistoryDTO;
@@ -31,7 +32,11 @@ public class RecordServiceImpl implements RecordService{
 
     @Override
     public List<MoodHistoryDTO> getMoodHistory(int type, int userId) {
-        return recordMapper.getMoodHistory(type, userId);
+        List<MoodHistoryDTO>list = recordMapper.getMoodHistory(type, userId);
+        for(MoodHistoryDTO dto:list){
+            dto.setMoodJson(new JSONObject(dto.getMood()));
+        }
+        return list;
     }
 
     @RabbitListener(queues = "callback.queue")
