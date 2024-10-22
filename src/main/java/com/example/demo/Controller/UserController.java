@@ -60,7 +60,8 @@ public class UserController {
             return Result.error("Account already exist");
         }
         String encryptedPassword = DigestUtils.md5DigestAsHex(userDTO.getPassword().getBytes());
-        int userId = userService.addUser(userDTO.getUsername(), encryptedPassword, userDTO.getEmail(), userDTO.getGender(), userDTO.getStatus(), avator);
+        userService.addUser(userDTO.getUsername(), encryptedPassword, userDTO.getEmail(), userDTO.getGender(), userDTO.getStatus(), avator);
+        int userId = userService.getUserByEmail(userDTO.getEmail()).getUserId();
         pointsService.initiateScore(userId);
         return Result.success();
     }

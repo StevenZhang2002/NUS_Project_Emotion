@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 @Mapper
 public interface UserMapper{
     @Insert("INSERT INTO tb_user(Username,Password,gender,email,status,avator) VALUES (#{username},#{password},#{gender},#{email},#{status},#{avator})")
-    @Options(useGeneratedKeys = true, keyProperty = "userId")
-    int addUser(String username, String password, String email, String gender, String status, byte[] avator);
+    void addUser(String username, String password, String email, String gender, String status, byte[] avator);
 
     @Select("SELECT * FROM tb_user WHERE userId = #{userId}")
     User getUserById(int userId);
