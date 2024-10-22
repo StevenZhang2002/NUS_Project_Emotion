@@ -49,5 +49,6 @@ public class RecordServiceImpl implements RecordService{
     @Override
     public void addRecord(Record record) {
         recordMapper.addRecord(record.getUserId(),record.getTitle(),record.getContent());
+        rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, record);
     }
 }
