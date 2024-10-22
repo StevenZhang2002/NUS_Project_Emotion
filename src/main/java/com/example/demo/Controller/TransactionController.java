@@ -21,19 +21,19 @@ public class TransactionController {
     @Autowired
     private TransactionService transactionService;
 
-    // 创建积分交易记录
-    @Operation(summary = "创建积分交易记录")
-    @PostMapping("/create")
-    public Result createTransaction(
-                                    @RequestParam Integer changeAmount,
-                                    @RequestParam String transactionType,
-                                    @RequestParam String description) {
-        Map<String, Object>claims = ThreadLocalUtil.get();
-        int userId = (int)claims.get("id");
-        log.info("创建交易记录：userId={}, changeAmount={}, transactionType={}", userId, changeAmount, transactionType);
-        transactionService.createTransaction(userId, changeAmount, transactionType, description);
-        return Result.success();
-    }
+//    // 创建积分交易记录
+//    @Operation(summary = "创建积分交易记录")
+//    @PostMapping("/create")
+//    public Result createTransaction(
+//                                    @RequestParam Integer changeAmount,
+//                                    @RequestParam String transactionType,
+//                                    @RequestParam String description) {
+//        Map<String, Object>claims = ThreadLocalUtil.get();
+//        int userId = (int)claims.get("id");
+//        log.info("创建交易记录：userId={}, changeAmount={}, transactionType={}", userId, changeAmount, transactionType);
+//        transactionService.createTransaction(userId, changeAmount, transactionType, description);
+//        return Result.success();
+//    }
 
 
     @Operation(summary = "获取积分交易记录")
@@ -47,7 +47,4 @@ public class TransactionController {
         return Result.success(pageBean);
 
     }
-
-
-
 }

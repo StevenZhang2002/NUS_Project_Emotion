@@ -1,5 +1,8 @@
 package com.example.demo.DTO;
 
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONObject;
+import jakarta.json.Json;
 import lombok.Data;
 
 import java.sql.Timestamp;
@@ -8,6 +11,7 @@ import java.sql.Timestamp;
 public class MoodHistoryDTO {
     int userId;
     int recordId;
-    int mood;
+    String mood;
+    JSON moodJson;
 
 }

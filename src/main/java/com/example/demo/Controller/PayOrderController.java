@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import cn.hutool.core.convert.Convert;
 
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class PayOrderController {
     @PostMapping("/create")
     public Result createPayOrder(@RequestParam Integer productId, @RequestParam Integer quantity, int addressId) {
         Map<String, Object> claims = ThreadLocalUtil.get();
-        Integer userId = (int)claims.get("id");
+            Integer userId = Convert.toInt(claims.get("id"));
         log.info("生成支付单：用户ID={}, 商品ID={}, 商品数量={}, 地址Id={}", userId, productId, quantity, addressId);
         OrderDTO order = payOrderService.createPayOrder(userId, productId,quantity, addressId);
         return Result.success(order);

@@ -85,7 +85,7 @@ public class PayOrderServiceImpl implements PayOrderService {
         transaction.setUserId(userId);
         transaction.setChangeAmount(-product.getPointsCost() * quantity); // 消耗积分
         transaction.setTransactionType("Spend");
-        transaction.setDescription("购买商品");
+        transaction.setDescription("Redeemed product");
 
         // 发送消息到 RabbitMQ
         rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, transaction);
