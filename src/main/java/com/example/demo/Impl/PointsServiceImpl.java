@@ -19,27 +19,28 @@ public class PointsServiceImpl implements PointsService {
 
     private static final String EXCHANGE = "points.exchange";
 
-    private static final String ROUTING_KEY = "record.routingkey";
+    private static final String ROUTING_KEY = "points.routingkey";
 
     @Override
     public void initiateScore(int userId) {
         pointsMapper.initiatePoints(userId);
         PointsTransactionDTO transaction = new PointsTransactionDTO();
         transaction.setUserId(userId);
-        transaction.setChangeAmount(800); // 消耗积分
+        transaction.setChangeAmount(800);
         transaction.setTransactionType("Earn");
         transaction.setDescription("Record Reward");
         rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, transaction);
     }
 
     @Override
-    public void addPoints(int userId, int points) {
+    public void addPoints(int userId) {
+        int points = 100;
         PointDTO pointDTO = pointsMapper.selectPointDTOByUserId(userId);
         int updatedPoints = pointDTO.getPointsBalance()+points;
-        pointsMapper.updatePointsBalance(userId,updatedPoints);
+        pointsMapper.updatePointsBalance(updatedPoints,userId);
         PointsTransactionDTO transaction = new PointsTransactionDTO();
         transaction.setUserId(userId);
-        transaction.setChangeAmount(points); // 消耗积分
+        transaction.setChangeAmount(points);
         transaction.setTransactionType("Earn");
         transaction.setDescription("Record Reward");
         rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, transaction);

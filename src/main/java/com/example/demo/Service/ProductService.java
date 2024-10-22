@@ -10,7 +10,5 @@ public interface ProductService {
 
     List<ProductDTO> searchProducts(String keyword) throws IOException;
 
-    boolean isElasticsearchEmpty() throws IOException;
-
     void importAllProductsToElasticsearch() throws IOException;
 }

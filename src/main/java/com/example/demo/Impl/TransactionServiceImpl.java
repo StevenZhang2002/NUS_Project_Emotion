@@ -19,7 +19,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Autowired
     private TransactionMapper transactionMapper;
 
-    @RabbitListener(queues = "points.queue")
+    @RabbitListener(queues = {"points.queue"})
     @Transactional
     public void receiveTransaction(PointsTransactionDTO transaction) {
         log.info("Received message from RabbitMQ: {}", transaction);

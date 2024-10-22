@@ -35,7 +35,7 @@ public class RecordController {
         Integer userId = (int)claims.get("id");
         record.setUserId(userId);
         recordService.addRecord(record);
-        pointsService.addPoints(userId,50);
+        pointsService.addPoints(userId);
         return Result.success();
     }
 
