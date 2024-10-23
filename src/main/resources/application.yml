@@ -3,12 +3,12 @@ spring:
     name: demo
   data:
     redis:
-      host: 47.129.197.205
-      port: 30007
+      host: 122.51.221.6
+      port: 30079
       password: JqA5i2JrtjpHTYDHiEDT
-      database: 0
+      database: 10
   rabbitmq:
-    host: 47.129.197.205
+    host: 122.51.221.6
     port: 30272
     virtual-host: md
     username: md
@@ -39,7 +39,6 @@ knife4j:
   enable: true
   setting:
     language: zh_cn
-
 
 
 

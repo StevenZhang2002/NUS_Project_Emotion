@@ -24,7 +24,7 @@ public class ElasticsearchConfig {
                 new UsernamePasswordCredentials("elastic", "elastic"));  // 设置用户名和密码
 
         // 创建 RestClientBuilder 并设置身份验证
-        RestClientBuilder builder = RestClient.builder(new HttpHost("47.129.197.205", 30920, "http"))
+        RestClientBuilder builder = RestClient.builder(new HttpHost("122.51.221.6", 30920, "http"))
                 .setHttpClientConfigCallback(httpClientBuilder ->
                         httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider));
 
