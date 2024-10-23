@@ -5,6 +5,7 @@ import com.example.demo.Service.UserService;
 import com.example.demo.Utils.Result;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 

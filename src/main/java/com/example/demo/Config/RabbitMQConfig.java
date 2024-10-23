@@ -21,6 +21,7 @@ public class RabbitMQConfig {
     private static final String POINTS_ROUTING_KEY = "points.routingkey";
     private static final String RECORD_QUEUE_NAME = "record.queue";
     private static final String RECORD_ROUTING_KEY = "record.routingkey";
+    private static final String CALLBACK_QUEUE_NAME = "callback.queue";
 
     @Bean
     public Queue pointsQueue() {
@@ -30,6 +31,11 @@ public class RabbitMQConfig {
     @Bean
     public Queue recordQueue() {
         return new Queue(RECORD_QUEUE_NAME, true); // 持久化队列
+    }
+
+    @Bean
+    public Queue callbackQueue() {
+        return new Queue(CALLBACK_QUEUE_NAME, true); // 持久化队列
     }
 
     @Bean
@@ -60,10 +66,4 @@ public class RabbitMQConfig {
         rabbitTemplate.setMessageConverter(jackson2JsonMessageConverter());
         return rabbitTemplate;
     }
-
-//    // 配置监听器适配器使用 Jackson2JsonMessageConverter
-//    @Bean
-//    public MessageListenerAdapter messageListenerAdapter(TransactionServiceImpl transactionService) {
-//        return new MessageListenerAdapter(transactionService, jackson2JsonMessageConverter());
-//    }
 }

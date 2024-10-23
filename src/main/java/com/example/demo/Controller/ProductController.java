@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -41,7 +43,7 @@ public class ProductController {
         try {
             productList = redisTemplate.opsForValue().get(PRODUCTS_CACHE_KEY);
             if (productList != null && !productList.isEmpty()) {
-                System.out.println("从缓存中取出数据");
+                System.out.println("从缓存中取出数据：" + productList);
                 return productList; // 如果缓存中有数据，直接返回
             }
         } catch (Exception e) {
@@ -55,9 +57,16 @@ public class ProductController {
         // 查询完数据库后，将结果存入缓存
         if (productList != null && !productList.isEmpty()) {
             // 设置缓存过期时间
-            redisTemplate.opsForValue().set(PRODUCTS_CACHE_KEY, productList, 1, TimeUnit.HOURS);
+            redisTemplate.opsForValue().set(PRODUCTS_CACHE_KEY, productList, 15, TimeUnit.MINUTES);
         }
 
         return productList;
+    }
+
+    @GetMapping("/search")
+    @Operation(summary = "根据关键词搜索商品")
+    public List<ProductDTO> searchProducts(@RequestParam String keyword) throws IOException {
+        // 使用 Elasticsearch 搜索商品
+        return productService.searchProducts(keyword);
     }
 }

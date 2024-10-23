@@ -3,13 +3,13 @@ spring:
     name: demo
   data:
     redis:
-      host: 192.168.245.128
-      port: 6379
-      password: 123321
-      database: 0
+      host: 122.51.221.6
+      port: 30079
+      password: JqA5i2JrtjpHTYDHiEDT
+      database: 10
   rabbitmq:
-    host: 13.251.129.185
-    port: 31681
+    host: 122.51.221.6
+    port: 30272
     virtual-host: md
     username: md
     password: 123
@@ -39,7 +39,6 @@ knife4j:
   enable: true
   setting:
     language: zh_cn
-
 
 
 
