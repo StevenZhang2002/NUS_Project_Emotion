@@ -49,12 +49,4 @@ public class RecordController {
         return Result.success(result);
     }
 
-//    @Operation(summary = "心情活跃度统计")
-//    @GetMapping("/Intensity/")
-//    public Result getIntensity(@RequestParam int queryPeriod){
-////        1: 本周；2：本月
-//        Map<String, Object> claims = ThreadLocalUtil.get();
-//        int userId = (int)claims.get("id");
-//        return Result.success(recordService.getIntensity(queryPeriod,userId));
-//    }
 }

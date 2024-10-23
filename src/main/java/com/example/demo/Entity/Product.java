@@ -16,6 +16,7 @@ public class Product {
     private String productDescription;
     private int pointsCost;
     private int stock;
+    private String image;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 }

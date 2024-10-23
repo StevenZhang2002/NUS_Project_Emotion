@@ -18,6 +18,6 @@ public interface PostMapper {
     public List<Post> list(Integer start, Integer pageSize);
 
     //插入数据
-    @Insert("insert into post(recordId,userId) values (#{recordId},#{recordId})")
+    @Insert("insert into post(recordId,userId) values (#{recordId},#{userId})")
     void insertPost(Post post);
 }

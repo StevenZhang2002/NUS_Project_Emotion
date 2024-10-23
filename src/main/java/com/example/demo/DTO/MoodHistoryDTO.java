@@ -12,6 +12,4 @@ public class MoodHistoryDTO {
     int userId;
     int recordId;
     String mood;
-    JSON moodJson;
-
 }

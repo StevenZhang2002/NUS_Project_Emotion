@@ -15,7 +15,6 @@ public interface RecordMapper {
 
     List<MoodHistoryDTO>getMoodHistory(int type, int userId);
 
-
     @Update("UPDATE record SET Mood = #{jsonData}, TopEmotion = #{topEmotion}, Comfort = #{comfortLanguage}, Guidance = #{behavioralGuidance} WHERE recordId = #{recordId}")
     void setIntensity(String jsonData, String topEmotion,String comfortLanguage,String behavioralGuidance,int recordId);
 
