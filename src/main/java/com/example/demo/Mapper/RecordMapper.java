@@ -1,6 +1,7 @@
 package com.example.demo.Mapper;
 
 import com.example.demo.DTO.MoodHistoryDTO;
+import com.example.demo.DTO.RecordIntensityDTO;
 import com.example.demo.Entity.Record;
 import org.apache.ibatis.annotations.*;
 import java.util.List;
@@ -12,6 +13,8 @@ public interface RecordMapper {
     @Insert("INSERT INTO record(userId, Title, Content) VALUES(#{userId}, #{title}, #{content})")
     @Options(useGeneratedKeys = true, keyProperty = "recordId")
     public void addRecord(Record record);
+
+    List<RecordIntensityDTO>getRecordIntensity(int type,int userId);
 
     List<MoodHistoryDTO>getMoodHistory(int type, int userId);
 

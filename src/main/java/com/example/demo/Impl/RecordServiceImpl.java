@@ -2,6 +2,7 @@ package com.example.demo.Impl;
 
 import cn.hutool.json.JSONUtil;
 import com.example.demo.DTO.IntensityDTO;
+import com.example.demo.DTO.RecordIntensityDTO;
 import com.example.demo.DTO.MoodHistoryDTO;
 import com.example.demo.Entity.Record;
 import com.example.demo.Mapper.RecordMapper;
@@ -65,5 +66,10 @@ public class RecordServiceImpl implements RecordService{
         recordMapper.addRecord(record);
         // 发送消息到 RabbitMQ
         rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, record);
+    }
+
+    @Override
+    public List<RecordIntensityDTO> getRecordIntensity(int type, int userId) {
+        return recordMapper.getRecordIntensity(type,userId);
     }
 }
