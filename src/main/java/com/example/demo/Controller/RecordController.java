@@ -3,7 +3,9 @@ package com.example.demo.Controller;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import com.example.demo.DTO.MoodHistoryDTO;
+import com.example.demo.DTO.RecordLatestDTO;
 import com.example.demo.Entity.Record;
 import com.example.demo.Service.PointsService;
 import com.example.demo.Service.RecordService;
@@ -74,6 +76,9 @@ public class RecordController {
         Map<String, Object> claims = ThreadLocalUtil.get();
         int userId = (int)claims.get("id");
         Record record = recordService.getLatestRecord(userId);
-        return Result.success(record);
+        RecordLatestDTO recordLatestDTO = new RecordLatestDTO(record.getRecordId(), record.getUserId(),
+                record.getContent(), record.getMood(),JSONUtil.parse(record.getMood()),
+                record.getCreatedAt(),record.getUpdatedAt());
+        return Result.success(recordLatestDTO);
     }
 }
