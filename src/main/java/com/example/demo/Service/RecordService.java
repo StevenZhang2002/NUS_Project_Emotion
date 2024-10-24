@@ -12,4 +12,6 @@ public interface RecordService {
     public void addRecord(Record record);
 
     public List<RecordIntensityDTO> getRecordIntensity(int type, int userId);
+
+    public Record getLatestRecord(int userId);
 }

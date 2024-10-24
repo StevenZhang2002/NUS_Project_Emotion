@@ -3,7 +3,9 @@ package com.example.demo.Controller;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import com.example.demo.DTO.MoodHistoryDTO;
+import com.example.demo.DTO.RecordLatestDTO;
 import com.example.demo.Entity.Record;
 import com.example.demo.Service.PointsService;
 import com.example.demo.Service.RecordService;
@@ -39,7 +41,7 @@ public class RecordController {
 
     @Operation(summary = "记录笔记")
     @PostMapping("/add")
-    public Result addRecord(@Validated @RequestBody Record record) {
+    public Result addRecord(@Validated @ModelAttribute Record record) {
         Map<String, Object> claims = ThreadLocalUtil.get();
         Integer userId = (int)claims.get("id");
         record.setUserId(userId);
@@ -65,5 +67,18 @@ public class RecordController {
         Map<String, Object> claims = ThreadLocalUtil.get();
         int userId = (int)claims.get("id");
         return Result.success(recordService.getRecordIntensity(queryPeriod,userId));
+    }
+
+
+    @Operation(summary = "获取最新记录")
+    @GetMapping("/latest")
+    public Result getLatestRecord(){
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        int userId = (int)claims.get("id");
+        Record record = recordService.getLatestRecord(userId);
+        RecordLatestDTO recordLatestDTO = new RecordLatestDTO(record.getRecordId(), record.getUserId(),
+                record.getContent(), record.getMood(),JSONUtil.parse(record.getMood()), record.getTopEmotion(), record.getComfortLanguage()
+                ,record.getBehavioralGuidance(), record.getCreatedAt(),record.getUpdatedAt());
+        return Result.success(recordLatestDTO);
     }
 }
