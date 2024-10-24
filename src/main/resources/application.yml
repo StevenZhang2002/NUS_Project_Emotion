@@ -3,12 +3,12 @@ spring:
     name: demo
   data:
     redis:
-      host: 47.129.197.205
+      host: 122.51.221.6
       port: 30007
       password: JqA5i2JrtjpHTYDHiEDT
       database: 0
   rabbitmq:
-    host: 47.129.197.205
+    host: 122.51.221.6
     port: 30272
     virtual-host: md
     username: md
@@ -16,7 +16,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/nusteamproject1
     username: root
-    password: Zbw01020304
+    password: 123456
 
 mybatis:
   configuration:
