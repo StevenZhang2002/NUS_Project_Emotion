@@ -14,7 +14,7 @@ spring:
     username: md
     password: 123
   datasource:
-    url: jdbc:mysql://localhost:3306/nusteamproject1
+    url: jdbc:mysql://54.255.253.1:3306/nusteamproject1
     username: root
     password: 123456
 
