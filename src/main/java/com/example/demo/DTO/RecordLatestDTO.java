@@ -14,7 +14,7 @@ import java.util.List;
 public class RecordLatestDTO {
     private Integer recordId;
     private Integer userId;
-    private String      content;
+    private String content;
     private String mood;
     private JSON moodJson;
     private String topEmotion;
