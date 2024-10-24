@@ -72,4 +72,9 @@ public class RecordServiceImpl implements RecordService{
     public List<RecordIntensityDTO> getRecordIntensity(int type, int userId) {
         return recordMapper.getRecordIntensity(type,userId);
     }
+
+    @Override
+    public Record getLatestRecord(int userId) {
+        return recordMapper.getLatestRecord(userId);
+    }
 }

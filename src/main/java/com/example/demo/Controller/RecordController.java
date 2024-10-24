@@ -66,4 +66,14 @@ public class RecordController {
         int userId = (int)claims.get("id");
         return Result.success(recordService.getRecordIntensity(queryPeriod,userId));
     }
+
+
+    @Operation(summary = "获取最新记录")
+    @GetMapping("/latest")
+    public Result getLatestRecord(){
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        int userId = (int)claims.get("id");
+        Record record = recordService.getLatestRecord(userId);
+        return Result.success(record);
+    }
 }
