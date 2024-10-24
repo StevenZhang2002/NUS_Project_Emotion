@@ -39,7 +39,7 @@ public class RecordController {
 
     @Operation(summary = "记录笔记")
     @PostMapping("/add")
-    public Result addRecord(@Validated @RequestBody Record record) {
+    public Result addRecord(@Validated @ModelAttribute Record record) {
         Map<String, Object> claims = ThreadLocalUtil.get();
         Integer userId = (int)claims.get("id");
         record.setUserId(userId);
