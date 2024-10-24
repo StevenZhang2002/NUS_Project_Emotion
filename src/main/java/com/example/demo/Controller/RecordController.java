@@ -77,8 +77,8 @@ public class RecordController {
         int userId = (int)claims.get("id");
         Record record = recordService.getLatestRecord(userId);
         RecordLatestDTO recordLatestDTO = new RecordLatestDTO(record.getRecordId(), record.getUserId(),
-                record.getContent(), record.getMood(),JSONUtil.parse(record.getMood()),
-                record.getCreatedAt(),record.getUpdatedAt());
+                record.getContent(), record.getMood(),JSONUtil.parse(record.getMood()), record.getTop_emotion(), record.getComfort_language()
+                ,record.getBehavioral_guidance(), record.getCreatedAt(),record.getUpdatedAt());
         return Result.success(recordLatestDTO);
     }
 }
