@@ -16,4 +16,7 @@ public class IntensityDTO {
             return "{" + "label='" + label + '\'' + ", score=" + score + '}';
         }
     }
+    private String top_emotion;
+    private String comfort_language;
+    private String behavioral_guidance;
 }

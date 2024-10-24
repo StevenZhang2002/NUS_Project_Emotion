@@ -77,10 +77,10 @@ public class UserController {
 
     @Operation(summary = "登录功能")
     @PostMapping("/login")
-    public Result login(@ModelAttribute UserLoginDTO userDto){
-        User user = userService.getUserByEmail(userDto.getEmail());
+    public Result login(@RequestParam String email, @RequestParam String password){
+        User user = userService.getUserByEmail(email);
         if(user!=null){
-            if(user.getPassword().equals(DigestUtils.md5DigestAsHex(userDto.getPassword().getBytes()))){
+            if(user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))){
                 Map<String, Object>claims = new HashMap<>();
                 claims.put("email", user.getEmail());
                 claims.put("id",user.getUserId());
