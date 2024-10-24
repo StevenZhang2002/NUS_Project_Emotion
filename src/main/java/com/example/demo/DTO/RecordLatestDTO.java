@@ -17,9 +17,9 @@ public class RecordLatestDTO {
     private String      content;
     private String mood;
     private JSON moodJson;
-    private String top_emotion;
-    private String comfort_language;
-    private String behavioral_guidance;
+    private String topEmotion;
+    private String comfortLanguage;
+    private String behavioralGuidance;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 

@@ -20,9 +20,9 @@ public class Record {
     private String mood;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private String top_emotion;
-    private String comfort_language;
-    private String behavioral_guidance;
+    private String topEmotion;
+    private String comfortLanguage;
+    private String behavioralGuidance;
     @JsonIgnore
     List<Photo> photoList;
 }
