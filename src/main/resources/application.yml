@@ -3,7 +3,7 @@ spring:
     name: demo
   data:
     redis:
-      host: localhost
+      host: 54.255.253.1
       port: 6379
       database: 0
   rabbitmq:
