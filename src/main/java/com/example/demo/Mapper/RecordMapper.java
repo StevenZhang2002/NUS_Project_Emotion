@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 public interface RecordMapper {
 
-    @Insert("INSERT INTO record(userId, Content) VALUES(#{userId}, #{content})")
+    @Insert("INSERT INTO record(userId, Title, Content) VALUES(#{userId}, #{title}, #{content})")
     @Options(useGeneratedKeys = true, keyProperty = "recordId")
     public void addRecord(Record record);
 

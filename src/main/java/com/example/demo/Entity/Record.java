@@ -14,6 +14,8 @@ public class Record {
     private Integer recordId;
     private Integer userId;
     @NotEmpty
+    private String title;
+    @NotEmpty
     private String content;
     private String mood;
     private Timestamp createdAt;
