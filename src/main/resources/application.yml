@@ -3,9 +3,8 @@ spring:
     name: demo
   data:
     redis:
-      host: 122.51.221.6
-      port: 30007
-      password: JqA5i2JrtjpHTYDHiEDT
+      host: localhost
+      port: 6379
       database: 0
   rabbitmq:
     host: 122.51.221.6
