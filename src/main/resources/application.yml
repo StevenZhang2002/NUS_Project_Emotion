@@ -4,9 +4,9 @@ spring:
   data:
     redis:
       host: 122.51.221.6
-      port: 30079
+      port: 30007
       password: JqA5i2JrtjpHTYDHiEDT
-      database: 10
+      database: 0
   rabbitmq:
     host: 122.51.221.6
     port: 30272
@@ -14,9 +14,9 @@ spring:
     username: md
     password: 123
   datasource:
-    url: jdbc:mysql://localhost:3306/nusteamproject1
+    url: jdbc:mysql://54.255.253.1:3306/nusteamproject1
     username: root
-    password: 1234
+    password: 123456
 
 mybatis:
   configuration:
@@ -39,6 +39,8 @@ knife4j:
   enable: true
   setting:
     language: zh_cn
+
+
 
 
 
