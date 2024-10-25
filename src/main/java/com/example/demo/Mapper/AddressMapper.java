@@ -9,20 +9,20 @@ import java.util.List;
 @Mapper
 public interface AddressMapper {
 
-    @Insert("INSERT INTO Address (userId, street, city, state, postalCode, country, createdAt, updatedAt) " +
+    @Insert("INSERT INTO address (userId, street, city, state, postalCode, country, createdAt, updatedAt) " +
             "VALUES (#{userId}, #{street}, #{city}, #{state}, #{postalCode}, #{country}, NOW(), NOW())")
     @Options(useGeneratedKeys = true, keyProperty = "addressId")
     int insertAddress(Address address);
 
 
-    @Select("SELECT * FROM Address WHERE addressId = #{addressId}")
+    @Select("SELECT * FROM address WHERE addressId = #{addressId}")
     Address getAddressById(int addressId);
 
 
-    @Delete("DELETE FROM Address WHERE addressId = #{id}")
+    @Delete("DELETE FROM address WHERE addressId = #{id}")
     void deleteAddressById(int id);
 
-    @Select("SELECT * FROM Address WHERE userId = #{userId}")
+    @Select("SELECT * FROM address WHERE userId = #{userId}")
     List<Address> getAddressByUserId(int userId);
 
 }
