@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 import java.security.InvalidKeyException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 
 import io.minio.BucketExistsArgs;
@@ -26,7 +24,7 @@ public class FileUploader {
             // 配置 Minio 服务连接信息
             String endpoint = "http://122.51.221.6:31090";
             String accessKey = "ZH5vn9AR4ZunA8qxiKBj";
-            String secretKey = "72KBoRg6fAfvp6ofYdRn05TJWHfkugrG1nb9ksR";
+            String secretKey = "72KBoRg6fAfvp6ofYdRn05TjJWHfkugrG1nb9ksR";
             String bucketName = "moodiary";
 
             // 使用 MinIO 服务的 URL，Access key 和 Secret key 创建一个 MinioClient 对象
@@ -45,19 +43,15 @@ public class FileUploader {
                 System.out.println("Bucket created.");
             }
 
-            // 格式化当前日期
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
-            String date = sdf.format(new Date());
-
             // 上传文件路径配置，使用本地图片的绝对路径
             File file = new File("C:\\Users\\22341\\Pictures\\Saved Pictures\\Resident-Evil-4-Remake-1.jpg");
             long size = file.length();
             String fileName = file.getName();
             InputStream is = new FileInputStream(file);
 
-            // 设置上传文件的路径
+            // 设置上传文件的路径，将文件存储到 "product" 文件夹下，不包含日期
             String uuid = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
-            String fileUploadPath = date + uuid + "file01" + fileName.substring(fileName.lastIndexOf("."));
+            String fileUploadPath = "product/" + uuid + "file01" + fileName.substring(fileName.lastIndexOf("."));
 
             // 使用 PutObjectArgs 上传文件，新的 API 接口方式
             minioClient.putObject(
@@ -70,6 +64,11 @@ public class FileUploader {
             );
 
             System.out.println(file.getAbsolutePath() + " is successfully uploaded as 【" + fileUploadPath + "】 to 【" + bucketName + "】bucket.");
+
+            // 生成公开的 URL
+            String publicUrl = endpoint + "/" + bucketName + "/" + fileUploadPath;
+            System.out.println("Public URL: " + publicUrl);
+
         } catch (MinioException e) {
             System.out.println("Error occurred: " + e);
         }
