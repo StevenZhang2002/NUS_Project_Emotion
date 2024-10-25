@@ -23,7 +23,7 @@ public class AddressController {
 
     @Operation(summary = "添加地址")
     @PostMapping("/addAddress")
-    public Result addAddress(@RequestBody Address address) {
+    public Result addAddress(@ModelAttribute Address address) {
         Map<String, Object> claims = ThreadLocalUtil.get();
         int userId = (int)claims.get("id");
         address.setUserId(userId);
