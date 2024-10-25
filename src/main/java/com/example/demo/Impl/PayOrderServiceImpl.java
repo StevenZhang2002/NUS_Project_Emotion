@@ -44,22 +44,7 @@ public class PayOrderServiceImpl implements PayOrderService {
     public OrderDTO createPayOrder(Integer userId, Integer productId, Integer quantity, int addressId) {
         // 1. 查询商品信息
         ProductDTO product = productsMapper.selectProductDTOById(productId);
-        if (product == null) {
-            throw new RuntimeException("商品不存在");
-        } else if (product.getStock() < quantity) {
-            throw new RuntimeException("商品库存不足");
-        }
-
-        if (addressMapper.getAddressById(addressId)==null){
-            throw new RuntimeException("Invalid Address");
-        }
-
-        // 2. 查询用户积分信息
         PointDTO userPoints = pointsMapper.selectPointDTOByUserId(userId);
-        if (userPoints == null || userPoints.getPointsBalance() < (product.getPointsCost())*quantity) {
-            throw new RuntimeException("用户积分不足");
-        }
-
         //3. 扣减商品库存
         int productsStock = product.getStock() - quantity;
         productsMapper.setProductsStock(productsStock,productId);

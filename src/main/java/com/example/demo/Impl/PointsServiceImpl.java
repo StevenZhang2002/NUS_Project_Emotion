@@ -45,4 +45,10 @@ public class PointsServiceImpl implements PointsService {
         transaction.setDescription("Record Reward");
         rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, transaction);
     }
+
+    @Override
+    public PointDTO getPoints(int userId) {
+        return pointsMapper.selectPointDTOByUserId(userId);
+    }
+
 }

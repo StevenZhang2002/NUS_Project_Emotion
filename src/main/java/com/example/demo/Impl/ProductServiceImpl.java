@@ -5,6 +5,7 @@ import co.elastic.clients.elasticsearch.core.IndexRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import com.example.demo.DTO.ProductDTO;
+import com.example.demo.Entity.Product;
 import com.example.demo.Mapper.ProductMapper;
 import com.example.demo.Service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,11 @@ public class ProductServiceImpl implements ProductService {
             elasticsearchClient.index(indexRequest);  // 将商品数据索引到 Elasticsearch
         }
         System.out.println("商品信息已导入到 Elasticsearch 索引库。");
+    }
+
+    @Override
+    public Product getProductById(int productId){
+        return productMapper.getProductById(productId);
     }
 
     // 根据关键词搜索商品
