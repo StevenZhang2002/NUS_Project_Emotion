@@ -23,7 +23,7 @@ public interface RecordMapper {
     Record getLatestRecord(int userId);
 
 
-    @Update("UPDATE record SET Mood = #{jsonData}, TopEmotion = #{topEmotion}, 'Comfort' = #{comfortLanguage}, Guidance = #{behavioralGuidance} WHERE recordId = #{recordId}")
+    @Update("UPDATE record SET Mood = #{jsonData}, TopEmotion = #{topEmotion}, ComfortLanguage = #{comfortLanguage}, BehavioralGuidance = #{behavioralGuidance} WHERE recordId = #{recordId}")
     void setIntensity(String jsonData, String topEmotion,String comfortLanguage,String behavioralGuidance,int recordId);
 
 }
