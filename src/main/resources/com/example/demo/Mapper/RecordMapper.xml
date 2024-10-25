@@ -21,7 +21,7 @@
 
     <select id="getRecordIntensity" resultType="com.example.demo.DTO.RecordIntensityDTO">
         SELECT DATE(createdAt) AS date, COUNT(*) AS post_count
-        FROM Record
+        FROM record
         <where>
         userId = #{userId}
         <if test="type==1">
