@@ -1,5 +1,6 @@
 package com.example.demo.Impl;
 
+import com.example.demo.DTO.PostDTO;
 import com.example.demo.Mapper.PostMapper;
 import com.example.demo.Entity.Post;
 import com.example.demo.Entity.PageBean;
@@ -22,15 +23,15 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public PageBean page(Integer page, Integer pageSize) {
-        //1、获取总记录数
+        // 1. 获取总记录数
         Long count = postMapper.count();
 
-        //2、获取分页查询结果列表
-        Integer start = (page - 1) * pageSize; //计算起始索引 , 公式: (页码-1)*页大小
-        List<Post> empList = postMapper.list(start, pageSize);
+        // 2. 获取分页查询结果列表
+        Integer start = (page - 1) * pageSize; // 计算起始索引 , 公式: (页码-1)*页大小
+        List<PostDTO> postDTOList = postMapper.list(start, pageSize);
 
-        //3、封装PageBean对象
-        PageBean pageBean = new PageBean(count , empList);
+        // 3. 封装PageBean对象
+        PageBean pageBean = new PageBean(count, postDTOList);
         return pageBean;
     }
 }

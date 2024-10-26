@@ -25,6 +25,6 @@ public class Record {
     private String topEmotion;
     private String comfortLanguage;
     private String behavioralGuidance;
-    @JsonIgnore
-    List<Photo> photoList;
+//    @JsonIgnore
+//    List<Photo> photoList;
 }
