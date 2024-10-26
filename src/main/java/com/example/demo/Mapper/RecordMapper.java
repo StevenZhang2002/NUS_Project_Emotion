@@ -34,7 +34,7 @@ public interface RecordMapper {
 
 
 
-    @Insert("INSERT INTO record(userId, Title, Content,BehaviorGuidance, ComfortLanguage, TopEmotion, moodJson, Mood) VALUES(#{userId}, #{title}, #{content},#{behavioralGuidance}, #{comfortLanguage},#{topEmotion},#{moodJson},#{mood})")
+    @Insert("INSERT INTO record(userId, Title, Content,BehavioralGuidance, ComfortLanguage, TopEmotion,Mood) VALUES(#{userId}, #{title}, #{content},#{behavioralGuidance}, #{comfortLanguage},#{topEmotion},#{mood})")
     public void addRecordAll(Record record);
 
 //

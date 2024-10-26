@@ -87,12 +87,12 @@ public class RecordServiceImpl implements RecordService{
         HttpEntity<Map<String, String>> request = new HttpEntity<>(requestBody, httpHeaders);
         // 发送请求并接收响应
         ResponseEntity<SentimentResponse> responseBack = restTemplate.postForEntity(flaskUrl, request, SentimentResponse.class);
+        System.out.println(responseBack);
         SentimentResponse sentimentResponse = responseBack.getBody();
         record.setTopEmotion(sentimentResponse.getTopEmotion());
         record.setComfortLanguage(sentimentResponse.getComfortLanguage());
-        record.setMood(sentimentResponse.getData());
+        record.setMood(sentimentResponse.getData().toString());
         record.setBehavioralGuidance(sentimentResponse.getBehavioralGuidance());
-        record.setMoodJson(JSONUtil.parse(sentimentResponse.getData()));
         recordMapper.addRecordAll(record);
     }
 

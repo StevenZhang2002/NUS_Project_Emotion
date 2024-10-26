@@ -4,15 +4,22 @@ import lombok.Data;
 
 import java.util.List;
 import java.util.Map;
-
-
 @Data
 public class SentimentResponse {
-
-    private String data; // 用于解析data字段中的情绪数据
+    private List<List<IntensityDTO.EmotionLabel>> data;
+    @Data
+    public static class EmotionLabel {
+        private String label;
+        private double score;
+        @Override
+        public String toString() {
+            return "{" + "label='" + label + '\'' + ", score=" + score + '}';
+        }
+    }
     private String topEmotion;
     private String comfortLanguage;
     private String behavioralGuidance;
 
+    // Getters and setters
 
 }
