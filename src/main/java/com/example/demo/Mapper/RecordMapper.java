@@ -38,7 +38,7 @@ public interface RecordMapper {
     public void addRecordAll(Record record);
 
 
-    @Select("SELECT createdAt AS date, COUNT(*) AS post_count FROM record WHERE userId=#{userId} AND date>=start AND date<=end  ")
+    @Select("SELECT DATE(createdAt), COUNT(*) AS post_count FROM record WHERE userId=#{userId} AND DATE(createdAt)>=start AND DATE(createdAt)<=end GROUP BY DATE(createdAt) ORDER BY DATE(createdAt)")
     public List<RecordIntensityDTO>getRecordIntensityByPeriod(int userId, Timestamp start, Timestamp end);
 
 
