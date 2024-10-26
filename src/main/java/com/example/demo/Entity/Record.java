@@ -6,6 +6,8 @@ import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+import cn.hutool.json.JSON;
+
 
 @Data
 @NoArgsConstructor
@@ -18,6 +20,7 @@ public class Record {
     @NotEmpty
     private String content;
     private String mood;
+    private JSON moodJson;
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private String topEmotion;

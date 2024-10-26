@@ -32,6 +32,11 @@ public interface RecordMapper {
     @Select("SELECT userId,recordId,Mood,Content,createdAt FROM record where userId = #{userId} AND createdAt>=#{start} AND createdAt<=#{end} ORDER BY createdAt DESC")
     List<MoodHistoryDTO>getHistoryByTimePeriod(int userId, Timestamp start, Timestamp end);
 
+
+
+    @Insert("INSERT INTO record(userId, Title, Content,BehaviorGuidance, ComfortLanguage, TopEmotion, moodJson, Mood) VALUES(#{userId}, #{title}, #{content},#{behavioralGuidance}, #{comfortLanguage},#{topEmotion},#{moodJson},#{mood})")
+    public void addRecordAll(Record record);
+
 //
 //    <select id="getMoodHistory" resultType="com.example.demo.DTO.MoodHistoryDTO">
 //    select userId,recordId,Mood,Content,createdAt from record
