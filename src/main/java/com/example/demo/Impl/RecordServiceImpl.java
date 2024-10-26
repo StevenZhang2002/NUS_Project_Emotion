@@ -42,7 +42,7 @@ public class RecordServiceImpl implements RecordService{
 
     private static final String ROUTING_KEY = "record.routingkey";
 
-    String flaskUrl = "http://localhost:5000/sentimentAnalysis";
+    String flaskUrl = "http://3.1.211.178:5000/sentimentAnalysis";
 
 
 
