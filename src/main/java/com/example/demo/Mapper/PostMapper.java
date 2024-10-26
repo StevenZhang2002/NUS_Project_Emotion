@@ -14,8 +14,9 @@ public interface PostMapper {
     @Select("select count(*) from post")
     public Long count();
 
-    //获取当前页的结果列表
-    @Select("SELECT p.postId, p.recordId, p.userId, r.title, r.content, r.mood, r.createdAt, r.updatedAt, r.topEmotion, r.comfortLanguage, r.behavioralGuidance " +
+    @Select("SELECT p.postId AS postId, p.recordId AS recordId, p.userId AS userId, r.title AS title, r.content AS content, " +
+            "r.mood AS mood, r.createdAt AS createdAt, r.updatedAt AS updatedAt, r.topEmotion AS topEmotion, " +
+            "r.comfortLanguage AS comfortLanguage, r.behavioralGuidance AS behavioralGuidance " +
             "FROM post p " +
             "JOIN record r ON p.recordId = r.recordId " +
             "ORDER BY p.createdAt DESC " +
