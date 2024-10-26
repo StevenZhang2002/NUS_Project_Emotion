@@ -11,6 +11,8 @@ public interface RecordService {
 
     public List<MoodHistoryDTO> getMoodHistory(int type,int userId);
 
+    public List<RecordIntensityDTO>getRecordIntensityByPeriod(int userId, Timestamp start, Timestamp end);
+
     public void addRecord(Record record);
 
     public List<RecordIntensityDTO> getRecordIntensity(int type, int userId);

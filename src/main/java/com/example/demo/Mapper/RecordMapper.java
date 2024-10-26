@@ -37,21 +37,26 @@ public interface RecordMapper {
     @Insert("INSERT INTO record(userId, Title, Content,BehavioralGuidance, ComfortLanguage, TopEmotion,Mood) VALUES(#{userId}, #{title}, #{content},#{behavioralGuidance}, #{comfortLanguage},#{topEmotion},#{mood})")
     public void addRecordAll(Record record);
 
-//
-//    <select id="getMoodHistory" resultType="com.example.demo.DTO.MoodHistoryDTO">
-//    select userId,recordId,Mood,Content,createdAt from record
+
+    @Select("SELECT DATE(createdAt) AS record_date, COUNT(*) AS post_count FROM record WHERE userId=#{userId} AND DATE(createdAt)>=#{start} AND DATE(createdAt)<=#{end} GROUP BY DATE(createdAt) ORDER BY DATE(createdAt)")
+    public List<RecordIntensityDTO>getRecordIntensityByPeriod(int userId, Timestamp start, Timestamp end);
+
+
+//    <select id="getRecordIntensity" resultType="com.example.demo.DTO.RecordIntensityDTO">
+//        SELECT DATE(createdAt) AS date, COUNT(*) AS post_count
+//        FROM record
 //        <where>
-//            <if test="type==1">
-//    DATE(createdAt) = CURDATE()
-//            </if>
-//            <if test="type==2">
-//    WEEK(createdAt) = WEEK(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
-//            </if>
-//            <if test="type==3">
-//    MONTH(createdAt) = MONTH(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
-//            </if>
-//    AND userId = #{userId} ORDER BY createdAt ASC;
+//        userId = #{userId}
+//        <if test="type==1">
+//        AND WEEK(createdAt) = WEEK(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
+//        </if>
+//        <if test="type==2">
+//            AND MONTH(createdAt) = MONTH(CURDATE()) AND YEAR(createdAt) = YEAR(CURDATE())
+//        </if>
 //        </where>
+//        GROUP BY DATE(createdAt) ORDER BY DATE(createdAt);
 //    </select>
+
+
 
 }

@@ -55,6 +55,11 @@ public class RecordServiceImpl implements RecordService{
         return list;
     }
 
+    @Override
+    public List<RecordIntensityDTO> getRecordIntensityByPeriod(int userId, Timestamp start, Timestamp end) {
+        return recordMapper.getRecordIntensityByPeriod(userId,start,end);
+    }
+
 //    @RabbitListener(queues = "callback.queue")
 //    @Transactional
 //    public void getIntensity(IntensityDTO intensityDTO) {
@@ -110,7 +115,6 @@ public class RecordServiceImpl implements RecordService{
 
     @Override
     public List<MoodHistoryDTO> getMoodHistoryTimeRange(int userId, Timestamp start, Timestamp end) {
-
         List<MoodHistoryDTO>res = recordMapper.getHistoryByTimePeriod(userId,start,end);
         for(MoodHistoryDTO dto:res){
             dto.setMoodJson(JSONUtil.parse(dto.getMood()));

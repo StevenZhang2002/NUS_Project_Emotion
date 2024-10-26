@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Data
 public class RecordIntensityDTO {
-    Date date;
+    Date recordDate;
     int postCount;
 
 }
