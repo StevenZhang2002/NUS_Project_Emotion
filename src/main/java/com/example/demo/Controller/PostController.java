@@ -4,6 +4,7 @@ import com.example.demo.Entity.Post;
 import com.example.demo.Service.PostService;
 import com.example.demo.Utils.Result;
 import com.example.demo.Entity.PageBean;
+import com.example.demo.Utils.ThreadLocalUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +32,9 @@ public class PostController {
     @Operation(summary = "发布朋友圈内容")
     @PostMapping("/release")
     public Result addPost(@ModelAttribute Post post) {
+        Map<String, Object>claims = ThreadLocalUtil.get();
+        int userId = (int)claims.get("id");
+        post.setUserId(userId);
         log.info("发布朋友圈内容：{}", post);
         postService.addPost(post);
         return Result.success();
