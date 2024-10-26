@@ -29,6 +29,7 @@ public class PostServiceImpl implements PostService {
         // 2. 获取分页查询结果列表
         Integer start = (page - 1) * pageSize; // 计算起始索引 , 公式: (页码-1)*页大小
         List<PostDTO> postDTOList = postMapper.list(start, pageSize);
+        System.out.println("Fetched PostDTO List: " + postDTOList);
 
         // 3. 封装PageBean对象
         PageBean pageBean = new PageBean(count, postDTOList);
