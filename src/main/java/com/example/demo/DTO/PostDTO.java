@@ -6,9 +6,9 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class PostDTO {
-    int postId;
-    int recordId;
-    int userId;
+    private int postId;
+    private int recordId;
+    private int userId;
     private String title;
     private String content;
     private String mood;
