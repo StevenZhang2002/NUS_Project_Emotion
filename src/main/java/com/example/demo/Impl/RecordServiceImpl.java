@@ -81,6 +81,8 @@ public class RecordServiceImpl implements RecordService{
 
     @Override
     public List<MoodHistoryDTO> getMoodHistoryTimeRange(int userId, Timestamp start, Timestamp end) {
+
         return recordMapper.getHistoryByTimePeriod(userId,start,end);
+
     }
 }

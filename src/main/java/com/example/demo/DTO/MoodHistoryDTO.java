@@ -16,5 +16,6 @@ public class MoodHistoryDTO {
     String mood;
     JSON moodJson;
     String content;
+    Timestamp createdAt;
 
 }
