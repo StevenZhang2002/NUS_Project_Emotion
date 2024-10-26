@@ -11,4 +11,5 @@ public class MoodHistory {
     private Integer mood;
     private Timestamp createdAt;
 
+
 }

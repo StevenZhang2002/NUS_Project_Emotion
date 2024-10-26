@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.Mapper.RecordMapper">
     <select id="getMoodHistory" resultType="com.example.demo.DTO.MoodHistoryDTO">
-        select userId,recordId,Mood,createdAt from record
+        select userId,recordId,Mood,Content,createdAt from record
         <where>
             <if test="type==1">
                 DATE(createdAt) = CURDATE()
