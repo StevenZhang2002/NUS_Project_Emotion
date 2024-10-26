@@ -14,6 +14,9 @@ spring:
     password: 123
     requested-heartbeat: 30
     connection-timeout: 5000
+    listener:
+      simple:
+        prefetch: 30
   datasource:
     url: jdbc:mysql://54.255.253.1:3306/nusteamproject1
     username: root
