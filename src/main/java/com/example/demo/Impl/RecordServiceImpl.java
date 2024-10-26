@@ -50,14 +50,6 @@ public class RecordServiceImpl implements RecordService{
         String topEmotion = intensityDTO.getTop_emotion();
         String comfortLanguage = intensityDTO.getComfort_language();
         String behavioralGuidance = intensityDTO.getBehavioral_guidance();
-
-        // 输出调试信息
-        System.out.println("接收到的记录 ID: " + recordId);
-        System.out.println("情绪数据: " + jsonData);
-        System.out.println("最高情绪: " + topEmotion);
-        System.out.println("安慰语言: " + comfortLanguage);
-        System.out.println("行为指导: " + behavioralGuidance);
-
         // 更新到数据库
         recordMapper.setIntensity(jsonData, topEmotion, comfortLanguage, behavioralGuidance, recordId);
     }
