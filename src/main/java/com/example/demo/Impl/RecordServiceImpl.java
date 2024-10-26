@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -76,5 +77,10 @@ public class RecordServiceImpl implements RecordService{
     @Override
     public Record getLatestRecord(int userId) {
         return recordMapper.getLatestRecord(userId);
+    }
+
+    @Override
+    public List<MoodHistoryDTO> getMoodHistoryTimeRange(int userId, Timestamp start, Timestamp end) {
+        return recordMapper.getHistoryByTimePeriod(userId,start,end);
     }
 }

@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -58,6 +59,15 @@ public class RecordController {
         Integer userId = Convert.toInt(claims.get("id"));
         List<MoodHistoryDTO> result = recordService.getMoodHistory(queryPeriod,userId);
         return Result.success(result);
+    }
+
+    @Operation(summary = "获取规定时间段内的笔记")
+    @GetMapping("/HistoryTimeRange")
+    public Result getMoodHistoryTimeRange(@RequestParam Timestamp start,@RequestParam Timestamp end){
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        int userId = (int)claims.get("id");
+        return Result.success(recordService.getMoodHistoryTimeRange(userId,start,end));
+
     }
 
     @Operation(summary = "心情活跃度统计")
