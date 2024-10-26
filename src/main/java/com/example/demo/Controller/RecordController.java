@@ -80,6 +80,16 @@ public class RecordController {
     }
 
 
+    @Operation(summary = "通过时间区间查询心情活跃度统计")
+    @GetMapping("/IntensityPeriod")
+    public Result getIntensityByRange(@RequestParam Timestamp start,@RequestParam Timestamp end){
+//        1: 本周；2：本月
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        int userId = (int)claims.get("id");
+        return Result.success(recordService.getRecordIntensityByPeriod(userId,start,end));
+    }
+
+
     @Operation(summary = "获取最新记录")
     @GetMapping("/latest")
     public Result getLatestRecord(){
