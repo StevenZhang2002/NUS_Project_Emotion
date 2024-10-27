@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper{
     @Insert("INSERT INTO tb_user(Username,Password,gender,email,status,avator) VALUES (#{username},#{password},#{gender},#{email},#{status},#{avator})")
@@ -20,4 +22,9 @@ public interface UserMapper{
 
     @Select("SELECT * FROM tb_user WHERE email = #{email}")
     User getUserByEmail(String email);
+
+    @Select("SELECT u.* FROM tb_user u " +
+            "JOIN friendship f ON (f.userId1 = #{userId} AND f.userId2 = u.userId) OR " +
+            "(f.userId2 = #{userId} AND f.userId1 = u.userId)")
+    List<User> getAllFriends(int userId);
 }
