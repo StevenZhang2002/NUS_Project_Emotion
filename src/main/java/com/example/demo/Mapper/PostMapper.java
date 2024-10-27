@@ -21,7 +21,7 @@ public interface PostMapper {
             "r.comfortLanguage AS comfortLanguage, r.behavioralGuidance AS behavioralGuidance " +
             "FROM post p " +
             "JOIN record r ON p.recordId = r.recordId " +
-            "JOIN user u ON p.userId = u.userId " +  // 添加user表的联查
+            "JOIN tb_user u ON p.userId = u.userId " +  // 添加user表的联查
             "ORDER BY p.createdAt DESC " +
             "LIMIT #{start}, #{pageSize}")
     List<PostDTO> list(Integer start, Integer pageSize);
