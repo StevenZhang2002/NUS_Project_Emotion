@@ -1,7 +1,9 @@
 package com.example.demo.Controller;
 
 import com.example.demo.Entity.Post;
+import com.example.demo.Service.FriendshipService;
 import com.example.demo.Service.PostService;
+import com.example.demo.Service.UserService;
 import com.example.demo.Utils.Result;
 import com.example.demo.Entity.PageBean;
 import com.example.demo.Utils.ThreadLocalUtil;
@@ -28,6 +30,9 @@ public class PostController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private UserService userService;
+
     //发布朋友圈内容
     @Operation(summary = "发布朋友圈内容")
     @PostMapping("/release")
@@ -47,6 +52,10 @@ public class PostController {
                        @RequestParam(defaultValue = "10") Integer pageSize) {
         //记录日志
         log.info("分页查询，参数：{},{}", page, pageSize);
+        Map<String, Object>claims = ThreadLocalUtil.get();
+        int userId = (int)claims.get("id");
+
+
         //调用业务层分页查询功能
         PageBean pageBean = postService.page(page, pageSize);
         //响应

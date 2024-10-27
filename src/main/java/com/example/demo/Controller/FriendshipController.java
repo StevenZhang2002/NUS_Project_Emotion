@@ -57,7 +57,7 @@ public class FriendshipController {
     public Result listFollowing() {
         Map<String, Object> claims = ThreadLocalUtil.get();
         Integer userId = (int)claims.get("id");
-            List<UserDTO> followingList = friendshipService.getFollowingList(userId);
-            return Result.success(followingList);
+        List<UserDTO> followingList = friendshipService.getFollowingList(userId);
+        return Result.success(followingList);
     }
 }
