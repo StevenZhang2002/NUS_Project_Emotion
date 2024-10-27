@@ -15,12 +15,14 @@ public class PostDTO {
     private int postId;
     private int recordId;
     private int userId;
-    private String Title;
-    private String Content;
-    private String Mood;
+    private String username;
+    private String email;
+    private String title;
+    private String content;
+    private String mood;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private String TopEmotion;
-    private String ComfortLanguage;
-    private String BehavioralGuidance;
+    private String topEmotion;
+    private String comfortLanguage;
+    private String behavioralGuidance;
 }

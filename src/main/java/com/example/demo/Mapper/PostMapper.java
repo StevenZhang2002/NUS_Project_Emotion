@@ -14,14 +14,18 @@ public interface PostMapper {
     @Select("select count(*) from post")
     public Long count();
 
-    @Select("SELECT p.postId AS postId, p.recordId AS recordId, p.userId AS userId, r.title AS title, r.content AS content, " +
-            "r.mood AS mood, r.createdAt AS createdAt, r.updatedAt AS updatedAt, r.topEmotion AS topEmotion, " +
+    @Select("SELECT p.postId AS postId, p.recordId AS recordId, p.userId AS userId, " +
+            "u.username AS username, u.email AS email, " +
+            "r.title AS title, r.content AS content, r.mood AS mood, " +
+            "r.createdAt AS createdAt, r.updatedAt AS updatedAt, r.topEmotion AS topEmotion, " +
             "r.comfortLanguage AS comfortLanguage, r.behavioralGuidance AS behavioralGuidance " +
             "FROM post p " +
             "JOIN record r ON p.recordId = r.recordId " +
+            "JOIN user u ON p.userId = u.userId " +  // 添加user表的联查
             "ORDER BY p.createdAt DESC " +
             "LIMIT #{start}, #{pageSize}")
     List<PostDTO> list(Integer start, Integer pageSize);
+
 
 
     //插入数据
