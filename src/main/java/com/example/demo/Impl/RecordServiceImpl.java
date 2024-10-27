@@ -49,6 +49,7 @@ public class RecordServiceImpl implements RecordService{
     @Override
     public List<MoodHistoryDTO> getMoodHistory(int type, int userId) {
         List<MoodHistoryDTO>list = recordMapper.getMoodHistory(type, userId);
+
         for(MoodHistoryDTO dto:list){
             dto.setMoodJson(JSONUtil.parse(dto.getMood()));
         }
