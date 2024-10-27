@@ -96,7 +96,8 @@ public class RecordServiceImpl implements RecordService{
         SentimentResponse sentimentResponse = responseBack.getBody();
         record.setTopEmotion(sentimentResponse.getTopEmotion());
         record.setComfortLanguage(sentimentResponse.getComfortLanguage());
-        record.setMood(sentimentResponse.getData().toString());
+        record.setMood(sentimentResponse.getData().toString().substring(1,sentimentResponse.getData().toString().length()-1).replace('=',':'));
+        System.out.println(record.getMood());
         record.setBehavioralGuidance(sentimentResponse.getBehavioralGuidance());
         recordMapper.addRecordAll(record);
     }

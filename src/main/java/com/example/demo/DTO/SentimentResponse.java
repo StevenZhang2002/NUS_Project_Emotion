@@ -11,6 +11,7 @@ public class SentimentResponse {
     public static class EmotionLabel {
         private String label;
         private double score;
+
         @Override
         public String toString() {
             return "{ " + label + ": " + score + " }";
