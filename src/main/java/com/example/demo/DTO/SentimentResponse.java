@@ -16,9 +16,9 @@ public class SentimentResponse {
             return "{" + "label='" + label + '\'' + ", score=" + score + '}';
         }
     }
-    private String TopEmotion;
-    private String ComfortLanguage;
-    private String BehavioralGuidance;
+    private String topEmotion;
+    private String comfortLanguage;
+    private String behavioralGuidance;
 
     // Getters and setters
 
