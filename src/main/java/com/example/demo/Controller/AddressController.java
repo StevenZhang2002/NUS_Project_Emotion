@@ -63,7 +63,7 @@ public class AddressController {
 
 
     @Operation(summary = "获取当前用户的所有地址")
-    @GetMapping("/adresses")
+    @GetMapping("/addresses")
     public Result getAddressByUserId(){
         Map<String, Object> claims = ThreadLocalUtil.get();
         int userId = (int)claims.get("id");
