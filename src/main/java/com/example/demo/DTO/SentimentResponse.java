@@ -13,7 +13,7 @@ public class SentimentResponse {
         private double score;
         @Override
         public String toString() {
-            return "{" + "label='" + label + '\'' + ", score=" + score + '}';
+            return "{ " + label + ": " + score + " }";
         }
     }
     private String topEmotion;
