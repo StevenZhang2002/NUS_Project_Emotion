@@ -6,72 +6,113 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 import java.security.InvalidKeyException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 
 import io.minio.BucketExistsArgs;
 import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
-import io.minio.errors.MinioException;
+import io.minio.errors.*;
 
 public class FileUploader {
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException, InvalidKeyException {
-        uploadFile();
+        String directoryPath = "D:\\Picture"; // 指定要上传的文件夹路径
+        uploadFilesFromDirectory(directoryPath);
     }
 
-    private static void uploadFile() throws InvalidKeyException, IOException, NoSuchAlgorithmException {
+    private static void uploadFilesFromDirectory(String directoryPath) throws InvalidKeyException, IOException, NoSuchAlgorithmException {
         try {
             // 配置 Minio 服务连接信息
             String endpoint = "http://122.51.221.6:31090";
-            String accessKey = "ZH5vn9AR4ZunA8qxiKBj";
-            String secretKey = "72KBoRg6fAfvp6ofYdRn05TJWHfkugrG1nb9ksR";
+            String accessKey = "xhkxRJ36nIudfXnpkF1M";
+            String secretKey = "0sPtBWMCXh1mX8x46ByxR4wKInKEIglPgeNZCo3Q";
             String bucketName = "moodiary";
 
-            // 使用 MinIO 服务的 URL，Access key 和 Secret key 创建一个 MinioClient 对象
+            // 创建 MinioClient 对象
             MinioClient minioClient = MinioClient.builder()
                     .endpoint(endpoint)
                     .credentials(accessKey, secretKey)
                     .build();
 
-            // 检查存储桶是否已经存在
+            // 检查存储桶是否存在
             boolean isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
             if (isExist) {
                 System.out.println("Bucket already exists.");
             } else {
-                // 创建一个存储桶
                 minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
                 System.out.println("Bucket created.");
             }
 
-            // 格式化当前日期
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd/");
-            String date = sdf.format(new Date());
+            // 获取文件夹下的所有文件
+            File directory = new File(directoryPath);
+            File[] files = directory.listFiles();
 
-            // 上传文件路径配置，使用本地图片的绝对路径
-            File file = new File("C:\\Users\\22341\\Pictures\\Saved Pictures\\Resident-Evil-4-Remake-1.jpg");
-            long size = file.length();
-            String fileName = file.getName();
-            InputStream is = new FileInputStream(file);
+            if (files != null) {
+                for (File file : files) {
+                    // 仅处理图片文件（可根据文件扩展名过滤，例如 jpg, png）
+                    if (file.isFile() && isImageFile(file)) {
+                        uploadSingleFile(minioClient, bucketName, file);
+                    }
+                }
+            } else {
+                System.out.println("The directory is empty or not accessible.");
+            }
+        } catch (MinioException e) {
+            System.out.println("Error occurred: " + e);
+        }
+    }
 
-            // 设置上传文件的路径
-            String uuid = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
-            String fileUploadPath = date + uuid + "file01" + fileName.substring(fileName.lastIndexOf("."));
+    private static void uploadSingleFile(MinioClient minioClient, String bucketName, File file) throws IOException {
+        long size = file.length();
+        String fileName = file.getName();
+        InputStream is = new FileInputStream(file);
 
-            // 使用 PutObjectArgs 上传文件，新的 API 接口方式
+        // 设置上传文件的路径
+        String uuid = UUID.randomUUID().toString().replace("-", "").substring(0, 6);
+        String fileUploadPath = fileName;
+
+        // 上传文件
+        try {
             minioClient.putObject(
                     PutObjectArgs.builder()
                             .bucket(bucketName)
                             .object(fileUploadPath)
                             .stream(is, size, -1) // 设置输入流和大小
-                            .contentType("image/png") // 根据你的文件类型设置 contentType
+                            .contentType("image/png") // 根据需要调整文件类型
                             .build()
             );
 
             System.out.println(file.getAbsolutePath() + " is successfully uploaded as 【" + fileUploadPath + "】 to 【" + bucketName + "】bucket.");
-        } catch (MinioException e) {
-            System.out.println("Error occurred: " + e);
+        } catch (ServerException e) {
+            throw new RuntimeException(e);
+        } catch (InsufficientDataException e) {
+            throw new RuntimeException(e);
+        } catch (ErrorResponseException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidResponseException e) {
+            throw new RuntimeException(e);
+        } catch (XmlParserException e) {
+            throw new RuntimeException(e);
+        } catch (InternalException e) {
+            throw new RuntimeException(e);
+        } finally {
+            is.close();
         }
+    }
+
+    // 判断文件是否为图片格式
+    private static boolean isImageFile(File file) {
+        String[] imageExtensions = {".jpg", ".jpeg", ".png", ".bmp", ".gif"};
+        String fileName = file.getName().toLowerCase();
+        for (String ext : imageExtensions) {
+            if (fileName.endsWith(ext)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

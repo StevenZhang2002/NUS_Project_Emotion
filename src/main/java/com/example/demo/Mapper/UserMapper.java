@@ -3,10 +3,7 @@ package com.example.demo.Mapper;
 import com.example.demo.Entity.User;
 import com.example.demo.Service.UserService;
 import com.example.demo.Utils.Result;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,4 +24,23 @@ public interface UserMapper{
             "JOIN friendship f ON (f.userId1 = #{userId} AND f.userId2 = u.userId) OR " +
             "(f.userId2 = #{userId} AND f.userId1 = u.userId)")
     List<User> getAllFriends(int userId);
+
+    @Update({
+            "<script>",
+            "UPDATE tb_user",
+            "<set>",
+            "<if test='username != null'>Username = #{username},</if>",
+            "<if test='email != null'>email = #{email},</if>",
+            "<if test='gender != null'>gender = #{gender},</if>",
+            "<if test='status != null'>status = #{status},</if>",
+            "<if test='avator != null'>avator = #{avator},</if>",
+            "</set>",
+            "WHERE userId = #{userId}",
+            "</script>"
+    })
+    void updateUser(int userId, String username, String email, String gender, String status, byte[] avator);
+
+    @Delete("DELETE FROM tb_user WHERE userId = #{userId}")
+    void deleteUser(int userId);
+
 }

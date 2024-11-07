@@ -95,6 +95,25 @@ public class UserController {
         return Result.error("Invalid Account");
     }
 
+    @Operation(summary = "修改用户信息")
+    @PutMapping("/updateUser")
+    public Result updateUser(@ModelAttribute @Validated UserDTO userDTO,
+                             @RequestParam(required = false) MultipartFile avatorPic) throws IOException {
+        User existingUser = userService.getUserByEmail(userDTO.getEmail());
+        if (existingUser == null) {
+            return Result.error("User does not exist");
+        }
+
+        byte[] avator = null;
+        if (avatorPic != null) {
+            avator = avatorPic.getBytes();
+        }
+
+        // 使用已存在的 userId 更新用户信息
+        userService.updateUser(existingUser.getUserId(), userDTO.getUsername(), userDTO.getEmail(),
+                userDTO.getGender(), userDTO.getStatus(), avator);
+        return Result.success("User updated successfully");
+    }
 
     @GetMapping("/getFriends")
     public Result getFriends(){
