@@ -23,7 +23,7 @@ spring:
   datasource:
     url: jdbc:mysql://54.255.253.1:3306/nusteamproject1
     username: root
-    password: 123456
+    password: 7U0jL8klCgloBATWJh8j
   mail:
     host: smtp.163.com
     username: 'SonyIntern2024@163.com'
