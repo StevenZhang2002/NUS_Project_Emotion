@@ -95,24 +95,25 @@ public class UserController {
         return Result.error("Invalid Account");
     }
 
-    @Operation(summary = "修改用户信息")
     @PutMapping("/updateUser")
-    public Result updateUser(@ModelAttribute @Validated UserDTO userDTO,
+    public Result updateUser(@RequestParam int userId, @ModelAttribute @Validated UserDTO userDTO,
                              @RequestParam(required = false) MultipartFile avatorPic) throws IOException {
-        User existingUser = userService.getUser(userDTO.getUserId()); // 使用 userId 查找用户
+        User existingUser = userService.getUser(userId); // 使用 userId 查找用户
         if (existingUser == null) {
             return Result.error("User does not exist");
         }
 
-        byte[] avator = null;
-        if (avatorPic != null) {
-            avator = avatorPic.getBytes();
-        }
+        // 使用 DTO 中提供的值更新用户
+        byte[] avator = avatorPic != null ? avatorPic.getBytes() : existingUser.getAvator();
+        String username = userDTO.getUsername() != null ? userDTO.getUsername() : existingUser.getUsername();
+        String email = userDTO.getEmail() != null ? userDTO.getEmail() : existingUser.getEmail();
+        String gender = userDTO.getGender() != null ? userDTO.getGender() : existingUser.getGender();
+        String status = userDTO.getStatus() != null ? userDTO.getStatus() : existingUser.getStatus();
 
-        userService.updateUser(existingUser.getUserId(), userDTO.getUsername(), userDTO.getEmail(),
-                userDTO.getGender(), userDTO.getStatus(), avator);
+        userService.updateUser(userId, username, email, gender, status, avator);
         return Result.success("User updated successfully");
     }
+
 
 
     @GetMapping("/getFriends")

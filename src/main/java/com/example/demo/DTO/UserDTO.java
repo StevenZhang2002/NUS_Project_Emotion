@@ -8,7 +8,6 @@ import lombok.Data;
 import java.sql.Timestamp;
 @Data
 public class UserDTO {
-    Integer userId;  // 新增 userId 字段
     @NotEmpty(message = "username is required")
     String username;
     @NotEmpty(message = "Password is required")
@@ -21,4 +20,3 @@ public class UserDTO {
     @NotEmpty
     String status;
 }
-
