@@ -13,7 +13,7 @@ public interface UserService {
 
     public List<User> getAllFriends(int userId);
 
-    public void updateUser(int userId, String username, String email, String gender, String status, byte[] avator);
+    public void updateUser(int userId, String username, String password, String email, String gender, String status, byte[] avator);
 
     public void deleteUser(int userId);
 

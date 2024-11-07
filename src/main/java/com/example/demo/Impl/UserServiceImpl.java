@@ -36,10 +36,10 @@ public class UserServiceImpl implements UserService {
         return userMapper.getAllFriends(userId);
     }
 
-    @Override
-    public void updateUser(int userId, String username, String email, String gender, String status, byte[] avator) {
-        userMapper.updateUser(userId, username, email, gender, status, avator);
+    public void updateUser(int userId, String username, String password, String email, String gender, String status, byte[] avator) {
+        userMapper.updateUser(userId, username, password, email, gender, status, avator);
     }
+
 
     @Override
     public void deleteUser(int userId) {

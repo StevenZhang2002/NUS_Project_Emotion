@@ -29,7 +29,8 @@ public interface UserMapper{
             "<script>",
             "UPDATE tb_user",
             "<set>",
-            "<if test='username != null'>Username = #{username},</if>",
+            "<if test='username != null'>username = #{username},</if>",
+            "<if test='password != null'>password = #{password},</if>",
             "<if test='email != null'>email = #{email},</if>",
             "<if test='gender != null'>gender = #{gender},</if>",
             "<if test='status != null'>status = #{status},</if>",
@@ -38,7 +39,7 @@ public interface UserMapper{
             "WHERE userId = #{userId}",
             "</script>"
     })
-    void updateUser(int userId, String username, String email, String gender, String status, byte[] avator);
+    void updateUser(int userId, String username, String password, String email, String gender, String status, byte[] avator);
 
     @Delete("DELETE FROM tb_user WHERE userId = #{userId}")
     void deleteUser(int userId);

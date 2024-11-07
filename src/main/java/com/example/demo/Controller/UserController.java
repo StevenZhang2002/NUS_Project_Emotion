@@ -96,25 +96,45 @@ public class UserController {
     }
 
     @PutMapping("/updateUser")
-    public Result updateUser(@RequestParam int userId, @ModelAttribute @Validated UserDTO userDTO,
+    public Result updateUser(@RequestParam int userId,
+                             @RequestParam(required = false) String username,
+                             @RequestParam(required = false) String password,
+                             @RequestParam(required = false) String email,
+                             @RequestParam(required = false) String gender,
+                             @RequestParam(required = false) String status,
                              @RequestParam(required = false) MultipartFile avatorPic) throws IOException {
-        User existingUser = userService.getUser(userId); // 使用 userId 查找用户
+
+        // 使用 userId 查找现有用户
+        User existingUser = userService.getUser(userId);
         if (existingUser == null) {
             return Result.error("User does not exist");
         }
 
-        // 使用 DTO 中提供的值更新用户
+        // 使用提供的值更新用户信息，如果未提供则保留原始值
         byte[] avator = avatorPic != null ? avatorPic.getBytes() : existingUser.getAvator();
-        String username = userDTO.getUsername() != null ? userDTO.getUsername() : existingUser.getUsername();
-        String email = userDTO.getEmail() != null ? userDTO.getEmail() : existingUser.getEmail();
-        String gender = userDTO.getGender() != null ? userDTO.getGender() : existingUser.getGender();
-        String status = userDTO.getStatus() != null ? userDTO.getStatus() : existingUser.getStatus();
+        String updatedUsername = username != null ? username : existingUser.getUsername();
+        String updatedPassword = password != null ? password : existingUser.getPassword();
+        String updatedEmail = email != null ? email : existingUser.getEmail();
+        String updatedGender = gender != null ? gender : existingUser.getGender();
+        String updatedStatus = status != null ? status : existingUser.getStatus();
 
-        userService.updateUser(userId, username, email, gender, status, avator);
+        // 调用服务层更新用户信息
+        userService.updateUser(userId, updatedUsername, updatedPassword, updatedEmail, updatedGender, updatedStatus, avator);
         return Result.success("User updated successfully");
     }
 
 
+    @Operation(summary = "删除用户")
+    @DeleteMapping("/deleteUser/{id}")
+    public Result deleteUser(@PathVariable int id) {
+        User user = userService.getUser(id);
+        if (user == null) {
+            return Result.error("User not found");
+        }
+
+        userService.deleteUser(id);
+        return Result.success("User deleted successfully");
+    }
 
     @GetMapping("/getFriends")
     public Result getFriends(){
