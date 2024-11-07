@@ -10,6 +10,7 @@ import com.example.demo.Mapper.PointsMapper;
 import com.example.demo.Mapper.ProductsMapper;
 import com.example.demo.Service.PayOrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationContext;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ import java.sql.Timestamp;
 @Slf4j
 @Service
 public class PayOrderServiceImpl implements PayOrderService {
+
+
 
     @Autowired
     private PointsMapper pointsMapper;
@@ -74,6 +77,8 @@ public class PayOrderServiceImpl implements PayOrderService {
 
         // 发送消息到 RabbitMQ
         rabbitTemplate.convertAndSend(EXCHANGE, ROUTING_KEY, transaction);
+
+
 
         return order;  // 返回生成的订单信息
         }
