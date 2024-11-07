@@ -99,7 +99,7 @@ public class UserController {
     @PutMapping("/updateUser")
     public Result updateUser(@ModelAttribute @Validated UserDTO userDTO,
                              @RequestParam(required = false) MultipartFile avatorPic) throws IOException {
-        User existingUser = userService.getUserByEmail(userDTO.getEmail());
+        User existingUser = userService.getUser(userDTO.getUserId()); // 使用 userId 查找用户
         if (existingUser == null) {
             return Result.error("User does not exist");
         }
@@ -109,11 +109,11 @@ public class UserController {
             avator = avatorPic.getBytes();
         }
 
-        // 使用已存在的 userId 更新用户信息
         userService.updateUser(existingUser.getUserId(), userDTO.getUsername(), userDTO.getEmail(),
                 userDTO.getGender(), userDTO.getStatus(), avator);
         return Result.success("User updated successfully");
     }
+
 
     @GetMapping("/getFriends")
     public Result getFriends(){
