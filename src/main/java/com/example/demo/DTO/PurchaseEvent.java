@@ -12,6 +12,4 @@ public class PurchaseEvent {
     public int userId;
     public String targetEmail;
     public String description;
-
-
 }
