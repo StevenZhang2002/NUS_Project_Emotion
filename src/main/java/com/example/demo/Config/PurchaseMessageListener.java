@@ -21,7 +21,7 @@ public class PurchaseMessageListener {
     public void sendMsg(PurchaseEvent event) {
         int userId = event.getUserId();
         String targetEmail = event.getTargetEmail();
-        emailService.sendSimpleMail(targetEmail,"your have purchased successfully","sb韩榕");
+        emailService.sendSimpleMail(targetEmail,"your have purchased successfully","Thank you so much for your purchase. This is a confirmation letter to let you know that the purchase is successful. \n\n\n\n\nSincerely,\n Hanrong");
         log.info("send successfully");
     }
 }
