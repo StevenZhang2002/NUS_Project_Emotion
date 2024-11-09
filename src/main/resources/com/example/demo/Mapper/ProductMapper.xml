@@ -6,16 +6,12 @@
     <update id="updateProduct" parameterType="com.example.demo.DTO.ProductDTO">
         UPDATE products
         <set>
-            <trim suffixOverrides=",">
-                <if test="productName != null">productName = #{productName},</if>
-                <if test="productDescription != null">productDescription = #{productDescription},</if>
-                <if test="pointsCost != null">pointsCost = #{pointsCost},</if>
-                <if test="stock != null">stock = #{stock},</if>
-                <if test="image != null">image = #{image},</if>
-            </trim>
+            <if test="productName != null">productName = #{productName},</if>
+            <if test="productDescription != null">productDescription = #{productDescription},</if>
+            <if test="pointsCost != null">pointsCost = #{pointsCost},</if>
+            <if test="stock != null">stock = #{stock},</if>
+            <if test="image != null">image = #{image},</if>
         </set>
-        WHERE productId = #{productId}
+        WHERE productId = #{productId};
     </update>
-
-
 </mapper>

@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 @Data
 public class ProductDTO implements Serializable {
-
     private Integer productId;
     private String productName;
     private String productDescription;
