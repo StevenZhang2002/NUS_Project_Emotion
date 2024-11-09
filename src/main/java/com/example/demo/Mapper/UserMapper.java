@@ -44,6 +44,6 @@ public interface UserMapper{
     @Delete("DELETE FROM tb_user WHERE userId = #{userId}")
     void deleteUser(int userId);
 
-    @Select("SELECT * FROM tb_user")
+    @Select("SELECT userId,Username,gender,email,status FROM tb_user")
     List<User> getAllUsers();
 }
