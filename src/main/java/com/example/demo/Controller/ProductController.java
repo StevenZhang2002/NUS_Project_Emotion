@@ -6,6 +6,7 @@ import com.example.demo.Utils.FileUploader;
 import com.example.demo.Utils.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -115,4 +116,12 @@ public class ProductController {
             return Result.error("商品添加失败: " + e.getMessage());
         }
     }
+
+    @DeleteMapping("/delete")
+    @Operation(summary = "删除商品")
+    public Result deleteProduct(@RequestParam int productId) {
+        productService.deleteProduct(productId);
+        return Result.success();
+    }
+
 }

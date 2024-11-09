@@ -2,6 +2,7 @@ package com.example.demo.Mapper;
 
 import com.example.demo.DTO.ProductDTO;
 import com.example.demo.Entity.Product;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -19,4 +20,7 @@ public interface ProductMapper {
     @Insert("INSERT INTO products (productName, productDescription, pointsCost, stock, image) " +
             "VALUES (#{productName}, #{productDescription}, #{pointsCost}, #{stock}, #{image})")
     void insertProduct(ProductDTO productDTO);
+
+    @Delete("DELETE from products where productId = #{productId}")
+    void deleteProduct(int productId);
 }

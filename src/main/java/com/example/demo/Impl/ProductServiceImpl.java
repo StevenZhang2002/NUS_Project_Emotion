@@ -95,4 +95,9 @@ public class ProductServiceImpl implements ProductService {
     public void addProduct(ProductDTO productDTO) {
         productMapper.insertProduct(productDTO);
     }
+
+    @Override
+    public void deleteProduct(int productId) {
+        productMapper.deleteProduct(productId);
+    }
 }
