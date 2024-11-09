@@ -10,26 +10,32 @@ import java.util.UUID;
 
 public class FileUploader {
 
-    private MinioClient minioClient;
-    private String bucketName;
+    // MinIO 配置信息，写死在类中
+    private static final String ENDPOINT = "http://122.51.221.6:31090";
+    private static final String ACCESS_KEY = "xhkxRJ36nIudfXnpkF1M";
+    private static final String SECRET_KEY = "0sPtBWMCXh1mX8x46ByxR4wKInKEIglPgeNZCo3Q";
+    private static final String BUCKET_NAME = "moodiary";
 
-    public FileUploader(String endpoint, String accessKey, String secretKey, String bucketName) {
+    private MinioClient minioClient;
+
+    // 无参构造方法，使用类内的配置信息
+    public FileUploader() {
         this.minioClient = MinioClient.builder()
-                .endpoint(endpoint)
-                .credentials(accessKey, secretKey)
+                .endpoint(ENDPOINT)
+                .credentials(ACCESS_KEY, SECRET_KEY)
                 .build();
-        this.bucketName = bucketName;
         initializeBucket();
     }
 
+    // 初始化 Bucket，如果不存在则创建
     private void initializeBucket() {
         try {
-            boolean isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(bucketName).build());
+            boolean isExist = minioClient.bucketExists(BucketExistsArgs.builder().bucket(BUCKET_NAME).build());
             if (!isExist) {
-                minioClient.makeBucket(MakeBucketArgs.builder().bucket(bucketName).build());
-                System.out.println("Bucket created: " + bucketName);
+                minioClient.makeBucket(MakeBucketArgs.builder().bucket(BUCKET_NAME).build());
+                System.out.println("Bucket created: " + BUCKET_NAME);
             } else {
-                System.out.println("Bucket already exists: " + bucketName);
+                System.out.println("Bucket already exists: " + BUCKET_NAME);
             }
         } catch (Exception e) {
             System.err.println("Error in bucket initialization: " + e.getMessage());
@@ -45,7 +51,7 @@ public class FileUploader {
             // 上传文件到 MinIO
             minioClient.putObject(
                     PutObjectArgs.builder()
-                            .bucket(bucketName)
+                            .bucket(BUCKET_NAME)
                             .object(fileUploadPath)
                             .stream(inputStream, size, -1)
                             .contentType("image/png") // 根据需要调整内容类型
@@ -56,7 +62,7 @@ public class FileUploader {
             String url = minioClient.getPresignedObjectUrl(
                     GetPresignedObjectUrlArgs.builder()
                             .method(Method.GET)  // 使用 MinIO 的 Method 枚举
-                            .bucket(bucketName)
+                            .bucket(BUCKET_NAME)
                             .object(fileUploadPath)
                             .build()
             );

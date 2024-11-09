@@ -32,12 +32,7 @@ public class ProductController {
     private RedisTemplate<String, List<ProductDTO>> redisTemplate;
 
     @Autowired
-    private FileUploader fileUploader = new FileUploader(
-            "http://122.51.221.6:31090",
-            "xhkxRJ36nIudfXnpkF1M",
-            "0sPtBWMCXh1mX8x46ByxR4wKInKEIglPgeNZCo3Q",
-            "moodiary"
-    );
+    private FileUploader fileUploader;
 
     // 缓存的key
     private static final String PRODUCTS_CACHE_KEY = "all_products";
