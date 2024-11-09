@@ -91,4 +91,8 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
     }
 
+    @Override
+    public void addProduct(ProductDTO productDTO) {
+        productMapper.insertProduct(productDTO);
+    }
 }

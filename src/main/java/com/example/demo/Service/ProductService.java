@@ -14,4 +14,6 @@ public interface ProductService {
     void importAllProductsToElasticsearch() throws IOException;
 
     Product getProductById(int productId);
+
+    void addProduct(ProductDTO productDTO);
 }
