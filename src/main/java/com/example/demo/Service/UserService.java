@@ -17,4 +17,5 @@ public interface UserService {
 
     public void deleteUser(int userId);
 
+    List<User> getAllUsers();
 }

@@ -46,4 +46,9 @@ public class UserServiceImpl implements UserService {
         userMapper.deleteUser(userId);
     }
 
+    @Override
+    public List<User> getAllUsers() {
+        return userMapper.getAllUsers();
+    }
+
 }

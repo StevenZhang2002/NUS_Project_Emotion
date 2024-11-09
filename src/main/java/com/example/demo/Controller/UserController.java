@@ -24,10 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping("/users")
@@ -122,8 +119,7 @@ public class UserController {
         userService.updateUser(userId, updatedUsername, updatedPassword, updatedEmail, updatedGender, updatedStatus, avator);
         return Result.success("User updated successfully");
     }
-
-
+    
     @Operation(summary = "删除用户")
     @DeleteMapping("/deleteUser/{id}")
     public Result deleteUser(@PathVariable int id) {
@@ -134,6 +130,13 @@ public class UserController {
 
         userService.deleteUser(id);
         return Result.success("User deleted successfully");
+    }
+
+    @Operation(summary = "查询全部用户")
+    @GetMapping("/getAll")
+    public Result getAll() {
+        List<User> users = userService.getAllUsers();
+        return Result.success(users);
     }
 
     @GetMapping("/getFriends")
