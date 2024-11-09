@@ -124,4 +124,44 @@ public class ProductController {
         return Result.success();
     }
 
+    @PatchMapping("/update")
+    @Operation(summary = "修改商品并上传图片")
+    public Result updateProduct(@RequestParam("productId") int productId,
+                                @RequestParam(value = "productName", required = false) String productName,
+                                @RequestParam(value = "productDescription", required = false) String productDescription,
+                                @RequestParam(value = "pointsCost", required = false) Integer pointsCost,
+                                @RequestParam(value = "stock", required = false) Integer stock,
+                                @RequestParam(value = "file", required = false) MultipartFile file) {
+        try {
+            // 创建 ProductDTO 并设置更新的属性
+            ProductDTO productDTO = new ProductDTO();
+            productDTO.setProductId(productId);
+            productDTO.setProductName(productName);
+            productDTO.setProductDescription(productDescription);
+            productDTO.setPointsCost(pointsCost);
+            productDTO.setStock(stock);
+
+            // 如果有文件上传，则先上传文件到 MinIO
+            if (file != null && !file.isEmpty()) {
+                String fileName = file.getOriginalFilename();
+                String imageUrl = fileUploader.uploadFile(file.getInputStream(), fileName, file.getSize());
+
+                if (imageUrl == null) {
+                    return Result.error("图片上传失败");
+                }
+                productDTO.setImage(imageUrl);  // 将生成的图片URL设置到 productDTO 中
+            }
+
+            // 调用 service 更新商品信息
+            productService.updateProduct(productDTO);
+            return Result.success("商品更新成功");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Result.error("文件上传失败: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Result.error("商品更新失败: " + e.getMessage());
+        }
+    }
+
 }

@@ -2,10 +2,8 @@ package com.example.demo.Mapper;
 
 import com.example.demo.DTO.ProductDTO;
 import com.example.demo.Entity.Product;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+
 import java.util.List;
 
 @Mapper
@@ -23,4 +21,6 @@ public interface ProductMapper {
 
     @Delete("DELETE from products where productId = #{productId}")
     void deleteProduct(int productId);
+
+    void updateProduct(ProductDTO productDTO);
 }

@@ -18,4 +18,6 @@ public interface ProductService {
     void addProduct(ProductDTO productDTO);
 
     void deleteProduct(int productId);
+
+    void updateProduct(ProductDTO productDTO);
 }

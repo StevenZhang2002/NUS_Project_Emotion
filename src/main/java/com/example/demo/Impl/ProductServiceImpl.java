@@ -100,4 +100,9 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(int productId) {
         productMapper.deleteProduct(productId);
     }
+
+    @Override
+    public void updateProduct(ProductDTO productDTO) {
+        productMapper.updateProduct(productDTO);
+    }
 }
