@@ -111,7 +111,6 @@ public class ProductController {
 
             // 调用 service 保存商品信息
             productService.addProduct(productDTO);
-
             return Result.success("商品添加成功");
         } catch (IOException e) {
             e.printStackTrace();
