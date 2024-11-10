@@ -117,6 +117,9 @@ public class ProductController {
     @Operation(summary = "删除商品")
     public Result deleteProduct(@RequestParam int productId) {
         productService.deleteProduct(productId);
+
+        updateRedis();
+
         return Result.success();
     }
 
