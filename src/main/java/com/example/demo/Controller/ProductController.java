@@ -122,7 +122,7 @@ public class ProductController {
 
     @PatchMapping("/update")
     @Operation(summary = "修改商品并上传图片")
-    public Result updateProduct(@RequestParam("productId") int productId,
+    public Result updateProduct(@RequestParam(value = "productId",required = true) int productId,
                                 @RequestParam(value = "productName", required = false) String productName,
                                 @RequestParam(value = "productDescription", required = false) String productDescription,
                                 @RequestParam(value = "pointsCost", required = false) Integer pointsCost,
