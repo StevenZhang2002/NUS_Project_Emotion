@@ -57,14 +57,7 @@ public class ProductController {
             System.err.println("Redis 连接失败，继续查询数据库：" + e.getMessage());
         }
 
-        // 缓存中没有数据，查询数据库
-        productList = productService.getAllProducts();
-
-        // 查询完数据库后，将结果存入缓存
-        if (productList != null && !productList.isEmpty()) {
-            // 设置缓存过期时间
-            redisTemplate.opsForValue().set(PRODUCTS_CACHE_KEY, productList, 15, TimeUnit.MINUTES);
-        }
+        updateRedis();
 
         return productList;
     }
@@ -107,6 +100,9 @@ public class ProductController {
 
             // 调用 service 保存商品信息
             productService.addProduct(productDTO);
+
+            updateRedis();
+
             return Result.success("商品添加成功");
         } catch (IOException e) {
             e.printStackTrace();
@@ -154,6 +150,9 @@ public class ProductController {
 
             // 调用 service 更新商品信息
             productService.updateProduct(productDTO);
+
+            updateRedis();
+
             return Result.success("商品更新成功");
         } catch (IOException e) {
             e.printStackTrace();
@@ -164,4 +163,14 @@ public class ProductController {
         }
     }
 
+    private void updateRedis() {
+        // 查询数据库
+        List<ProductDTO> productList = productService.getAllProducts();
+
+        // 查询完数据库后，将结果存入缓存
+        if (productList != null && !productList.isEmpty()) {
+            // 设置缓存过期时间
+            redisTemplate.opsForValue().set(PRODUCTS_CACHE_KEY, productList, 15, TimeUnit.MINUTES);
+        }
+    }
 }
