@@ -16,17 +16,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/nusteamproject1
     username: root
-<<<<<<< HEAD
     password: lihao8080
-  data:
-    redis:
-      password: 1234
-      host: 13.229.95.80
-      port: 6379
-      database: 0
-=======
-    password: 1234
->>>>>>> origin/master
+
 
 mybatis:
   configuration:
