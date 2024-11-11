@@ -3,31 +3,28 @@ spring:
     name: demo
   data:
     redis:
-      host: 122.51.221.6
-      port: 30079
-      password: JqA5i2JrtjpHTYDHiEDT
-  #    redis:
-  #      host: 54.255.253.1
-  #      port: 6379
-  #      database: 0
+      host:
+      port:
+      password:
+
   rabbitmq:
-    host: 122.51.221.6
-    port: 30272
-    virtual-host: md
-    username: md
-    password: 123
-    requested-heartbeat: 30
-    connection-timeout: 5000
+    host:
+    port:
+    virtual-host:
+    username:
+    password:
+    requested-heartbeat:
+    connection-timeout:
 
 
   datasource:
-    url: jdbc:mysql://54.255.253.1:3306/nusteamproject1
-    username: root
-    password: 7U0jL8klCgloBATWJh8j
+    url:
+    username:
+    password:
   mail:
     host: smtp.163.com
-    username: 'SonyIntern2024@163.com'
-    password: 'YYEOPJVMTMZAXABY'
+    username:
+    password:
     protocol: smtp
     port: 465
     default-encoding: utf-8

@@ -51,7 +51,7 @@ public class PayOrderController {
                 if(pointDTO.getPointsBalance()>=quantity*productService.getProductById(productId).getPointsCost()){
                     OrderDTO order = payOrderService.createPayOrder(userId, productId,quantity, addressId);
                     String targetEmail = userService.getUser(userId).getEmail();
-                    applicationContext.publishEvent(new PurchaseEvent(userId,targetEmail,"嘿嘿"));
+                    applicationContext.publishEvent(new PurchaseEvent(userId,targetEmail,"Hi"));
                     return Result.success(order);
                 }
                 return Result.error("No Enough Points");
