@@ -1,2 +1,0 @@
-roberta-go_emotions filter=lfs diff=lfs merge=lfs -text
-roberta-go_emotions/* filter=lfs diff=lfs merge=lfs -text
