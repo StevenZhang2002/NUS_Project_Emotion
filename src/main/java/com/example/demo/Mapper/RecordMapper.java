@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.*;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 
 @Mapper
@@ -40,6 +41,14 @@ public interface RecordMapper {
 
     @Select("SELECT DATE(createdAt) AS record_date, COUNT(*) AS post_count FROM record WHERE userId=#{userId} AND DATE(createdAt)>=#{start} AND DATE(createdAt)<=#{end} GROUP BY DATE(createdAt) ORDER BY DATE(createdAt)")
     public List<RecordIntensityDTO>getRecordIntensityByPeriod(int userId, Timestamp start, Timestamp end);
+
+    @Select("SELECT TopEmotion, COUNT(*) AS count "
+            + "FROM record "
+            + "WHERE userId = #{userId} "
+            + "GROUP BY TopEmotion "
+            + "ORDER BY count DESC "
+            + "LIMIT 10")
+    public List<Map<String,Object>>getWordCloud(int userId);
 
 
 //    <select id="getRecordIntensity" resultType="com.example.demo.DTO.RecordIntensityDTO">

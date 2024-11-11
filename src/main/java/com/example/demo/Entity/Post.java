@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 public class Post {
     private Integer postId;
+    private String content;
     private Integer recordId; // 外键
     private Integer userId; // 外键
     private Timestamp createdAt;

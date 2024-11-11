@@ -124,4 +124,9 @@ public class RecordServiceImpl implements RecordService{
         return res;
 
     }
+
+    @Override
+    public List<Map<String,Object>> getWordCloud(int userId) {
+        return recordMapper.getWordCloud(userId);
+    }
 }

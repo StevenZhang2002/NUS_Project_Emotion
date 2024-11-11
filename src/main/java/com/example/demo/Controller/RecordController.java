@@ -101,4 +101,12 @@ public class RecordController {
                 ,record.getBehavioralGuidance(), record.getCreatedAt(),record.getUpdatedAt());
         return Result.success(recordLatestDTO);
     }
+
+    @Operation(summary = "提供词云素材")
+    @GetMapping
+    public Result getCloudWord(){
+        Map<String, Object> claims = ThreadLocalUtil.get();
+        int userId = (int)claims.get("id");
+        return Result.success(recordService.getWordCloud(userId));
+    }
 }

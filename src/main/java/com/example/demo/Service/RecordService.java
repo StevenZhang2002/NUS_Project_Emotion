@@ -6,6 +6,7 @@ import com.example.demo.Entity.Record;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 public interface RecordService {
 
@@ -20,4 +21,6 @@ public interface RecordService {
     public Record getLatestRecord(int userId);
 
     public List<MoodHistoryDTO> getMoodHistoryTimeRange(int userId, Timestamp start, Timestamp end);
+
+    public List<Map<String,Object>> getWordCloud(int userId);
 }
