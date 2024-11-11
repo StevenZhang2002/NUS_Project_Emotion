@@ -6,7 +6,7 @@ name: Build Maven Project
 on:
   push:
     branches:
-      - master_replicate
+      - developer_yhh
 #heiheihei
 jobs:
   build:
