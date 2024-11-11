@@ -92,6 +92,7 @@ public class UserController {
         return Result.error("Invalid Account");
     }
 
+    @Operation(summary = "更新用户")
     @PutMapping("/updateUser")
     public Result updateUser(@RequestParam int userId,
                              @RequestParam(required = false) String username,
@@ -139,6 +140,7 @@ public class UserController {
         return Result.success(users);
     }
 
+    @Operation(summary = "查询好友关系")
     @GetMapping("/getFriends")
     public Result getFriends(){
         Map<String, Object> claims = ThreadLocalUtil.get();
